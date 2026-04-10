@@ -1,22 +1,17 @@
 "use client";
 
 import { useState } from "react";
-import { motion, AnimatePresence } from "framer-motion";
+import { motion } from "framer-motion";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import {
   ArrowLeft,
-  Upload,
   Sparkles,
   FileCode,
-  Wand2,
   FileUp,
-  X,
   CheckCircle2,
   Loader2,
-  Zap,
   Brain,
-  Settings,
   Target,
   Rocket,
   Lightbulb,
@@ -352,8 +347,6 @@ export default function NewStudioPage() {
 
 /* ── Visual Results Gallery ─── */
 
-const ctaColors = ["#F97316", "#22C55E", "#3B82F6", "#EF4444", "#A855F7", "#EC4899", "#14B8A6", "#F59E0B"];
-const ctaTexts = ["PLAY NOW", "PLAY FREE", "TRY NOW", "INSTALL →", "DOWNLOAD", "START", "LET'S GO", "TAP HERE"];
 const mechanicTypes = ["Puzzle", "Match3", "Runner", "Puzzle", "Match3"];
 const iconSets: Record<string, string[]> = {
   Puzzle: ["🧩", "🔷", "🔶", "🟣", "🟠", "🔵"],

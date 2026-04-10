@@ -27,19 +27,10 @@ import {
   Sparkles,
   Send,
   Wand2,
-  TrendingUp,
-  AlertTriangle,
   CheckCircle2,
-  FileCode,
-  Layers,
-  X,
   ChevronDown,
   ChevronUp,
   RefreshCw,
-  Palette,
-  Type,
-  Lightbulb,
-  Zap,
   Download,
 } from "lucide-react";
 import Link from "next/link";
@@ -57,7 +48,7 @@ const aiSuggestions = [
   { id: 5, type: "filesize", title: "Compress images giảm 40%", impact: "-1.2MB size", confidence: 98, applied: false, detail: 'WEBP conversion + lossless compression available. Current: 4.3MB → Target: 3.1MB' },
 ];
 
-export default function StudioEditorPage({ params }: { params: { projectId: string } }) {
+export default function StudioEditorPage({ }: { params: { projectId: string } }) {
   const [editorTab, setEditorTab] = useState<EditorTab>("settings");
   const [previewTab, setPreviewTab] = useState<PreviewTab>("preview");
   const [device, setDevice] = useState<DeviceType>("phone");
