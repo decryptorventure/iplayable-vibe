@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import { motion, AnimatePresence } from "framer-motion";
+import { motion } from "framer-motion";
 import Link from "next/link";
 import {
   ArrowLeft,
@@ -9,21 +9,15 @@ import {
   Grid3X3,
   List,
   RotateCcw,
-  Plus,
   CheckSquare,
-  Sparkles,
   ChevronRight,
-  MoreHorizontal,
   Pencil,
   Copy,
   Trash2,
-  Download,
-  Rocket,
   Eye,
   Clock,
   User,
   FileCode,
-  Layers,
 } from "lucide-react";
 import { Topbar } from "@/components/layout/topbar";
 import { mockPlayableAds } from "@/lib/mock-data";
@@ -55,8 +49,6 @@ export default function PlayableAdDetailPage({ params }: { params: { adId: strin
   const [viewMode, setViewMode] = useState<"grid" | "list">("grid");
   const [search, setSearch] = useState("");
   const [selectMode, setSelectMode] = useState(false);
-  const [selectedIds, setSelectedIds] = useState<string[]>([]);
-  const [contextMenu, setContextMenu] = useState<string | null>(null);
 
   const filtered = mockVariants.filter((v) =>
     search ? v.name.toLowerCase().includes(search.toLowerCase()) : true

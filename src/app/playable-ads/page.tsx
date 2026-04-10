@@ -7,19 +7,16 @@ import {
   Grid3X3,
   List,
   RotateCcw,
-  Upload,
   CheckSquare,
   Wand2,
   ChevronLeft,
   ChevronRight,
-  SlidersHorizontal,
   X,
   FileUp,
 } from "lucide-react";
 import { Topbar } from "@/components/layout/topbar";
 import { PlayableCard } from "@/components/playable-ads/playable-card";
 import { mockPlayableAds } from "@/lib/mock-data";
-import type { PlayableAd } from "@/lib/mock-data";
 
 const ITEMS_PER_PAGE = 12;
 
@@ -32,7 +29,7 @@ export default function PlayableAdsPage() {
   const [currentPage, setCurrentPage] = useState(1);
   const [showQuickCreate, setShowQuickCreate] = useState(false);
   const [selectMode, setSelectMode] = useState(false);
-  const [selectedIds, setSelectedIds] = useState<string[]>([]);
+
 
   const filtered = useMemo(() => {
     let result = [...mockPlayableAds];
@@ -73,11 +70,6 @@ export default function PlayableAdsPage() {
     currentPage * ITEMS_PER_PAGE
   );
 
-  const toggleSelect = useCallback((id: string) => {
-    setSelectedIds((prev) =>
-      prev.includes(id) ? prev.filter((x) => x !== id) : [...prev, id]
-    );
-  }, []);
 
   return (
     <div className="flex h-full flex-col overflow-hidden">
