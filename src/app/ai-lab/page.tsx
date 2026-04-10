@@ -5,8 +5,6 @@ import { motion } from "framer-motion";
 import {
   Brain,
   Database,
-  FlaskConical,
-  LineChart,
   Lightbulb,
   TrendingUp,
   Cpu,
@@ -14,8 +12,6 @@ import {
   Zap,
   RefreshCw,
   CheckCircle2,
-  AlertCircle,
-  Clock,
   Sparkles,
 } from "lucide-react";
 import { Topbar } from "@/components/layout/topbar";
