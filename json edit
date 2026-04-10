@@ -1,0 +1,61 @@
+{
+  "cta": {
+    "state": "disabled",
+    "type": "label",
+    "size": "60",
+    "height": "60",
+    "color": "#FFFFFF",
+    "text": "",
+    "backgroundColor": "#000000",
+    "outline": {
+      "state": "disabled",
+      "color": "#FFFFFF",
+      "width": "2"
+    },
+    "position": "(0,0,0)"
+  },
+  "sound": {
+    "music": {
+      "state": "enabled",
+      "volume": "0.50"
+    },
+    "sound": {
+      "state": "enabled",
+      "volume": "0.80"
+    }
+  },
+  "tutorial": {
+    "state": "enabled",
+    "type": ""
+  },
+  "mechanic": {
+    "state": "disabled",
+    "content": "",
+    "position": "(0,0,0)"
+  },
+  "level": {
+    "content": "{}",
+    "position": "(0,0,0)",
+    "scale": "(1,1,1)"
+  },
+  "directToStore": {
+    "click": {
+      "state": "disabled",
+      "target": "3"
+    },
+    "firstClickTimer": {
+      "state": "disabled",
+      "seconds": "5"
+    },
+    "lastClickTimer": {
+      "state": "disabled",
+      "seconds": "5"
+    },
+    "time": {
+      "state": "disabled",
+      "seconds": "5"
+    },
+    "googlePlayUrl": "",
+    "appleStoreUrl": ""
+  }
+}

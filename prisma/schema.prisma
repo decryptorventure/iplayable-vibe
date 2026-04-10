@@ -1,0 +1,35 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model Project {
+  id            String    @id @default(cuid())
+  name          String
+  slug          String    @unique
+  status        String    @default("Active")
+  totalVariants Int       @default(0)
+  avgCTR        Float     @default(0)
+  avgCVR        Float     @default(0)
+  totalSpend    Float     @default(0)
+  thumbnail     String?
+  createdAt     DateTime  @default(now())
+  updatedAt     DateTime  @updatedAt
+  variants      Variant[]
+}
+
+model Variant {
+  id        String   @id @default(cuid())
+  projectId String
+  project   Project  @relation(fields: [projectId], references: [id], onDelete: Cascade)
+  name      String
+  config    Json
+  status    String   @default("Draft")
+  ctr       Float?
+  cvr       Float?
+  createdAt DateTime @default(now())
+}
