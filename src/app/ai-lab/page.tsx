@@ -237,10 +237,12 @@ export default function AILabPage() {
                           initial={{ width: 0 }}
                           animate={{ width: `${model.accuracy}%` }}
                           transition={{ duration: 1, delay: 0.3 }}
-                          className={`h-full rounded-full ${
+                          style={{ height: '100%' }}
+                        >
+                          <div className={`h-full rounded-full ${
                             model.accuracy >= 85 ? "bg-success" : model.accuracy >= 70 ? "bg-warning" : "bg-danger"
-                          }`}
-                        />
+                          }`} />
+                        </motion.div>
                       </div>
                     </div>
                   )}
