@@ -12,9 +12,6 @@ import {
 } from "lucide-react";
 import type { Project } from "@/types";
 
-function formatMoney(value: number) {
-  return `$${value.toLocaleString()}`;
-}
 
 function AnimatedCounter({ target, decimals = 0, prefix = "", suffix = "" }: {
   target: number;

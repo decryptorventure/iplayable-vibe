@@ -4,11 +4,10 @@ import Link from "next/link";
 import { motion } from "framer-motion";
 import {
   ArrowRight,
-  CircleDot,
   Gamepad2,
   Layers,
 } from "lucide-react";
-import { cn } from "@/lib/utils";
+
 import type { PlayableAd } from "@/lib/mock-data";
 
 function statusColor(status: PlayableAd["status"]) {
@@ -17,11 +16,6 @@ function statusColor(status: PlayableAd["status"]) {
   return "bg-warning";
 }
 
-function statusText(status: PlayableAd["status"]) {
-  if (status === "active") return "Active";
-  if (status === "inactive") return "Inactive";
-  return "Draft";
-}
 
 export function PlayableCard({
   ad,

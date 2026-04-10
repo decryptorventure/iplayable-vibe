@@ -1,6 +1,6 @@
 "use client";
 
-import { Bell, Search, Command, X, CheckCircle2, AlertTriangle, Rocket, Brain, RefreshCw, TrendingDown } from "lucide-react";
+import { Bell, Search, Command, X, CheckCircle2, AlertTriangle, Brain, RefreshCw, TrendingDown } from "lucide-react";
 import { useEffect, useRef, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import Link from "next/link";

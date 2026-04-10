@@ -15,7 +15,6 @@ const hueFromSeed = (seed: string, offset: number) => {
   return ((h + offset * 137) % 360);
 };
 
-const bgPatterns = ["puzzle", "match3", "runner"] as const;
 const iconSets: Record<string, string[]> = {
   Puzzle: ["🧩", "🔷", "🔶", "🟣", "🟠", "🔵"],
   Match3: ["🍎", "🍊", "🍋", "🫐", "🍇", "🍉"],
@@ -313,7 +312,7 @@ export function VariantGalleryPane() {
               <Eye className="h-8 w-8 text-zinc-600" />
             </div>
             <p className="text-sm font-medium text-zinc-400">Chưa có variant nào</p>
-            <p className="mt-1 text-xs text-zinc-600">Nhập prompt ở AI Copilot bên trái → Bấm "Magic Generate"</p>
+            <p className="mt-1 text-xs text-zinc-600">Nhập prompt ở AI Copilot bên trái &rarr; Bấm &quot;Magic Generate&quot;</p>
           </div>
         </div>
       )}

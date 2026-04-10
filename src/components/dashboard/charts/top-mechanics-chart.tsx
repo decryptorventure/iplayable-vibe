@@ -27,7 +27,6 @@ export function TopMechanicsChart() {
     ctx.scale(dpr, dpr);
 
     const w = rect.width;
-    const h = rect.height;
     const padding = { top: 10, right: 30, bottom: 10, left: 80 };
     const chartW = w - padding.left - padding.right;
     const maxVal = Math.max(...mechanics.map((m) => m.value));

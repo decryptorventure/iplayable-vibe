@@ -422,7 +422,7 @@ function MiniAdPreview({ variant, index }: { variant: GeneratedVariant; index: n
   );
 }
 
-function ResultsGallery({ variants, brief }: { variants: GeneratedVariant[]; brief: { variants: number } }) {
+function ResultsGallery({ variants }: { variants: GeneratedVariant[] }) {
   const [selectedIds, setSelectedIds] = useState<string[]>([]);
   const [filterMech, setFilterMech] = useState("all");
   const router = useRouter();
