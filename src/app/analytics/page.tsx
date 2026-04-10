@@ -13,14 +13,12 @@ import {
   BarChart3,
   Target,
   Calendar,
-  Filter,
   X,
   CheckCircle2,
   ArrowRight,
   Sparkles,
   Loader2,
   Beaker,
-  Trophy,
 } from "lucide-react";
 import { Topbar } from "@/components/layout/topbar";
 

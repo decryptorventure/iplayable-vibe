@@ -4,15 +4,10 @@ import { useState } from "react";
 import { motion } from "framer-motion";
 import {
   FileText,
-  Calendar,
   Download,
   Mail,
   Clock,
-  CheckCircle2,
   Plus,
-  BarChart3,
-  TrendingUp,
-  Target,
   Sparkles,
   Eye,
 } from "lucide-react";
@@ -80,7 +75,7 @@ const recentReports = [
 ];
 
 export default function ReportsPage() {
-  const [showCreate, setShowCreate] = useState(false);
+  const [, setShowCreate] = useState(false);
 
   return (
     <div className="flex h-full flex-col overflow-hidden">
