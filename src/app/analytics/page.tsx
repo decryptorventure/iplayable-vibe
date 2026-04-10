@@ -121,26 +121,27 @@ export default function AnalyticsPage() {
               initial={{ opacity: 0, y: 12 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.3, delay: index * 0.05 }}
-              className="rounded-xl border border-zinc-800/60 bg-surface-2 p-4"
             >
-              <div className="mb-2 flex items-center justify-between">
-                <kpi.icon className={`h-4 w-4 ${kpi.color}`} />
-                <MiniSparkline
-                  data={[3, 5, 4, 7, 6, 8, 7, 9, 8, 10]}
-                  color={kpi.trend >= 0 ? "#22C55E" : "#EF4444"}
-                />
-              </div>
-              <p className="text-lg font-bold text-zinc-100">{kpi.value}</p>
-              <div className="mt-1 flex items-center justify-between">
-                <p className="text-[11px] text-zinc-500">{kpi.label}</p>
-                <span
-                  className={`flex items-center gap-0.5 text-[11px] font-medium ${
-                    kpi.trend >= 0 ? "text-success" : "text-danger"
-                  }`}
-                >
-                  {kpi.trend >= 0 ? <TrendingUp className="h-3 w-3" /> : <TrendingDown className="h-3 w-3" />}
-                  {Math.abs(kpi.trend)}%
-                </span>
+              <div className="rounded-xl border border-zinc-800/60 bg-surface-2 p-4">
+                <div className="mb-2 flex items-center justify-between">
+                  <kpi.icon className={`h-4 w-4 ${kpi.color}`} />
+                  <MiniSparkline
+                    data={[3, 5, 4, 7, 6, 8, 7, 9, 8, 10]}
+                    color={kpi.trend >= 0 ? "#22C55E" : "#EF4444"}
+                  />
+                </div>
+                <p className="text-lg font-bold text-zinc-100">{kpi.value}</p>
+                <div className="mt-1 flex items-center justify-between">
+                  <p className="text-[11px] text-zinc-500">{kpi.label}</p>
+                  <span
+                    className={`flex items-center gap-0.5 text-[11px] font-medium ${
+                      kpi.trend >= 0 ? "text-success" : "text-danger"
+                    }`}
+                  >
+                    {kpi.trend >= 0 ? <TrendingUp className="h-3 w-3" /> : <TrendingDown className="h-3 w-3" />}
+                    {Math.abs(kpi.trend)}%
+                  </span>
+                </div>
               </div>
             </motion.div>
           ))}
@@ -336,11 +337,10 @@ function ABTestSection() {
       {/* A/B Test Wizard Modal */}
       <AnimatePresence>
         {showWizard && (
-          <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}
-            className="fixed inset-0 z-50 flex items-center justify-center bg-black/60 backdrop-blur-sm" onClick={resetWizard}>
-            <motion.div initial={{ scale: 0.95, opacity: 0 }} animate={{ scale: 1, opacity: 1 }} exit={{ scale: 0.95, opacity: 0 }}
-              onClick={(e) => e.stopPropagation()}
-              className="w-full max-w-lg rounded-2xl border border-zinc-800/60 bg-surface-1 shadow-2xl">
+          <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}>
+            <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/60 backdrop-blur-sm" onClick={resetWizard}>
+              <motion.div initial={{ scale: 0.95, opacity: 0 }} animate={{ scale: 1, opacity: 1 }} exit={{ scale: 0.95, opacity: 0 }}>
+                <div className="w-full max-w-lg rounded-2xl border border-zinc-800/60 bg-surface-1 shadow-2xl" onClick={(e) => e.stopPropagation()}>
 
               {/* Header */}
               <div className="flex items-center justify-between border-b border-zinc-800/40 px-6 py-4">
@@ -477,8 +477,10 @@ function ABTestSection() {
                 {/* Launched success */}
                 {launched && (
                   <div className="py-6 text-center">
-                    <motion.div initial={{ scale: 0 }} animate={{ scale: 1 }} className="mx-auto mb-3 flex h-16 w-16 items-center justify-center rounded-full bg-success/10">
-                      <CheckCircle2 className="h-8 w-8 text-success" />
+                    <motion.div initial={{ scale: 0 }} animate={{ scale: 1 }}>
+                      <div className="mx-auto mb-3 flex h-16 w-16 items-center justify-center rounded-full bg-success/10">
+                        <CheckCircle2 className="h-8 w-8 text-success" />
+                      </div>
                     </motion.div>
                     <h4 className="mb-1 text-base font-bold text-zinc-100">Test Launched! 🎉</h4>
                     <p className="text-xs text-zinc-400">A/B test đã bắt đầu. Bạn sẽ nhận thông báo khi có kết quả.</p>
@@ -512,7 +514,9 @@ function ABTestSection() {
                   </button>
                 )}
               </div>
-            </motion.div>
+                </div>
+              </motion.div>
+            </div>
           </motion.div>
         )}
       </AnimatePresence>

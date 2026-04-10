@@ -327,46 +327,48 @@ export default function StudioEditorPage({ }: { params: { projectId: string } })
             <motion.div
               animate={{ scale: zoom / 100 }}
               transition={{ type: "spring", stiffness: 300, damping: 30 }}
-              className="relative"
             >
-              {/* Phone mockup */}
-              <div className={`overflow-hidden rounded-[32px] border border-zinc-700 bg-zinc-950 shadow-2xl ${device === "phone" ? "w-[290px]" : device === "tablet" ? "w-[480px]" : "w-[640px]"}`}
-                style={{ padding: 12 }}
-              >
-                <div className="mx-auto mb-2 h-1.5 w-16 rounded-full bg-zinc-700" />
-                <div className="overflow-hidden rounded-[24px] border border-zinc-800 bg-black"
-                  style={{ height: device === "phone" ? 520 : device === "tablet" ? 640 : 400 }}
+              <div className="relative">
+                {/* Phone mockup */}
+                <div className={`overflow-hidden rounded-[32px] border border-zinc-700 bg-zinc-950 shadow-2xl ${device === "phone" ? "w-[290px]" : device === "tablet" ? "w-[480px]" : "w-[640px]"}`}
+                  style={{ padding: 12 }}
                 >
-                  {/* Fake playable content */}
-                  <div className="relative flex h-full flex-col items-center justify-center" style={{ background: "linear-gradient(180deg, #1a0a2e 0%, #0d1117 100%)" }}>
-                    {/* Game content mockup */}
-                    <div className="mb-4 text-center">
-                      <div className="mx-auto mb-3 flex h-20 w-20 items-center justify-center rounded-2xl bg-gradient-to-br from-primary via-yellow-500 to-pink-500">
-                        <span className="text-3xl">🧩</span>
-                      </div>
-                      <div className="mx-auto mb-6 h-40 w-48 rounded-xl border border-zinc-700/50 bg-zinc-800/30 flex items-center justify-center">
-                        <div className="grid grid-cols-3 gap-1.5">
-                          {Array.from({ length: 9 }).map((_, i) => (
-                            <div key={i} className="h-8 w-8 rounded-lg" style={{
-                              background: ["#F97316", "#22C55E", "#06B6D4", "#A855F7", "#EF4444", "#FBBF24", "#F97316", "#22C55E", "#06B6D4"][i],
-                              opacity: 0.7 + Math.random() * 0.3,
-                            }} />
-                          ))}
+                  <div className="mx-auto mb-2 h-1.5 w-16 rounded-full bg-zinc-700" />
+                  <div className="overflow-hidden rounded-[24px] border border-zinc-800 bg-black"
+                    style={{ height: device === "phone" ? 520 : device === "tablet" ? 640 : 400 }}
+                  >
+                    {/* Fake playable content */}
+                    <div className="relative flex h-full flex-col items-center justify-center" style={{ background: "linear-gradient(180deg, #1a0a2e 0%, #0d1117 100%)" }}>
+                      {/* Game content mockup */}
+                      <div className="mb-4 text-center">
+                        <div className="mx-auto mb-3 flex h-20 w-20 items-center justify-center rounded-2xl bg-gradient-to-br from-primary via-yellow-500 to-pink-500">
+                          <span className="text-3xl">🧩</span>
+                        </div>
+                        <div className="mx-auto mb-6 h-40 w-48 rounded-xl border border-zinc-700/50 bg-zinc-800/30 flex items-center justify-center">
+                          <div className="grid grid-cols-3 gap-1.5">
+                            {Array.from({ length: 9 }).map((_, i) => (
+                              <div key={i} className="h-8 w-8 rounded-lg" style={{
+                                background: ["#F97316", "#22C55E", "#06B6D4", "#A855F7", "#EF4444", "#FBBF24", "#F97316", "#22C55E", "#06B6D4"][i],
+                                opacity: 0.7 + Math.random() * 0.3,
+                              }} />
+                            ))}
+                          </div>
                         </div>
                       </div>
+                      {/* CTA button */}
+                      <motion.div
+                        animate={{ scale: [1, 1.05, 1] }}
+                        transition={{ duration: 1.5, repeat: Infinity, ease: "easeInOut" }}
+                      >
+                        <button className="rounded-full bg-gradient-to-r from-primary to-primary-light px-8 py-3 text-sm font-bold text-white shadow-glow-lg">
+                          PLAY NOW
+                        </button>
+                      </motion.div>
                     </div>
-                    {/* CTA button */}
-                    <motion.button
-                      animate={{ scale: [1, 1.05, 1] }}
-                      transition={{ duration: 1.5, repeat: Infinity, ease: "easeInOut" }}
-                      className="rounded-full bg-gradient-to-r from-primary to-primary-light px-8 py-3 text-sm font-bold text-white shadow-glow-lg"
-                    >
-                      PLAY NOW
-                    </motion.button>
                   </div>
-                </div>
-                <div className="mx-auto mt-2 w-fit rounded-full border border-zinc-700 p-1.5">
-                  <Smartphone className="h-3 w-3 text-zinc-500" />
+                  <div className="mx-auto mt-2 w-fit rounded-full border border-zinc-700 p-1.5">
+                    <Smartphone className="h-3 w-3 text-zinc-500" />
+                  </div>
                 </div>
               </div>
             </motion.div>
@@ -449,42 +451,44 @@ export default function StudioEditorPage({ }: { params: { projectId: string } })
       {/* Export Modal */}
       <AnimatePresence>
         {showExport && (
-          <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}
-            className="fixed inset-0 z-50 flex items-center justify-center bg-black/60 backdrop-blur-sm" onClick={() => setShowExport(false)}>
-            <motion.div initial={{ opacity: 0, scale: 0.95 }} animate={{ opacity: 1, scale: 1 }} exit={{ opacity: 0, scale: 0.95 }}
-              onClick={(e) => e.stopPropagation()} className="mx-4 w-full max-w-md rounded-2xl border border-zinc-800/60 bg-surface-2 p-6">
-              <h3 className="mb-1 text-lg font-semibold text-zinc-100">Export & Distribute</h3>
-              <p className="mb-4 text-xs text-zinc-500">Chọn hành động cho playable ad này</p>
+          <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}>
+            <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/60 backdrop-blur-sm" onClick={() => setShowExport(false)}>
+              <motion.div initial={{ opacity: 0, scale: 0.95 }} animate={{ opacity: 1, scale: 1 }} exit={{ opacity: 0, scale: 0.95 }}>
+                <div className="mx-4 w-full max-w-md rounded-2xl border border-zinc-800/60 bg-surface-2 p-6" onClick={(e) => e.stopPropagation()}>
+                  <h3 className="mb-1 text-lg font-semibold text-zinc-100">Export & Distribute</h3>
+                  <p className="mb-4 text-xs text-zinc-500">Chọn hành động cho playable ad này</p>
 
-              <div className="space-y-2">
-                <button className="flex w-full items-center gap-3 rounded-xl border border-zinc-800/40 bg-surface-1 p-4 text-left transition hover:border-primary/30">
-                  <Download className="h-5 w-5 text-info" />
-                  <div>
-                    <p className="text-sm font-medium text-zinc-200">Download HTML</p>
-                    <p className="text-[11px] text-zinc-500">Tải file HTML5 single file</p>
+                  <div className="space-y-2">
+                    <button className="flex w-full items-center gap-3 rounded-xl border border-zinc-800/40 bg-surface-1 p-4 text-left transition hover:border-primary/30">
+                      <Download className="h-5 w-5 text-info" />
+                      <div>
+                        <p className="text-sm font-medium text-zinc-200">Download HTML</p>
+                        <p className="text-[11px] text-zinc-500">Tải file HTML5 single file</p>
+                      </div>
+                    </button>
+                    <button className="flex w-full items-center gap-3 rounded-xl border border-zinc-800/40 bg-surface-1 p-4 text-left transition hover:border-primary/30">
+                      <CloudUpload className="h-5 w-5 text-primary" />
+                      <div>
+                        <p className="text-sm font-medium text-zinc-200">Export to Google Cloud</p>
+                        <p className="text-[11px] text-zinc-500">Push to Cloud Storage bucket</p>
+                      </div>
+                    </button>
+                    <button onClick={() => { setShowExport(false); setShowDistribute(true); }}
+                      className="flex w-full items-center gap-3 rounded-xl border border-primary/30 bg-primary/5 p-4 text-left transition hover:bg-primary/10">
+                      <Rocket className="h-5 w-5 text-primary" />
+                      <div>
+                        <p className="text-sm font-medium text-primary">Distribute to Ad Networks</p>
+                        <p className="text-[11px] text-zinc-400">Deploy đến AppLovin, Unity, Mintegral</p>
+                      </div>
+                    </button>
                   </div>
-                </button>
-                <button className="flex w-full items-center gap-3 rounded-xl border border-zinc-800/40 bg-surface-1 p-4 text-left transition hover:border-primary/30">
-                  <CloudUpload className="h-5 w-5 text-primary" />
-                  <div>
-                    <p className="text-sm font-medium text-zinc-200">Export to Google Cloud</p>
-                    <p className="text-[11px] text-zinc-500">Push to Cloud Storage bucket</p>
-                  </div>
-                </button>
-                <button onClick={() => { setShowExport(false); setShowDistribute(true); }}
-                  className="flex w-full items-center gap-3 rounded-xl border border-primary/30 bg-primary/5 p-4 text-left transition hover:bg-primary/10">
-                  <Rocket className="h-5 w-5 text-primary" />
-                  <div>
-                    <p className="text-sm font-medium text-primary">Distribute to Ad Networks</p>
-                    <p className="text-[11px] text-zinc-400">Deploy đến AppLovin, Unity, Mintegral</p>
-                  </div>
-                </button>
-              </div>
 
-              <button onClick={() => setShowExport(false)} className="mt-4 w-full rounded-lg border border-zinc-800/60 py-2 text-xs text-zinc-400 hover:text-zinc-200">
-                Cancel
-              </button>
-            </motion.div>
+                  <button onClick={() => setShowExport(false)} className="mt-4 w-full rounded-lg border border-zinc-800/60 py-2 text-xs text-zinc-400 hover:text-zinc-200">
+                    Cancel
+                  </button>
+                </div>
+              </motion.div>
+            </div>
           </motion.div>
         )}
       </AnimatePresence>
@@ -531,138 +535,141 @@ function DistributionWizard({ onClose }: { onClose: () => void }) {
   };
 
   return (
-    <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}
-      className="fixed inset-0 z-50 flex items-center justify-center bg-black/60 backdrop-blur-sm" onClick={onClose}>
-      <motion.div initial={{ opacity: 0, scale: 0.95, y: 12 }} animate={{ opacity: 1, scale: 1, y: 0 }} exit={{ opacity: 0, scale: 0.95 }}
-        onClick={(e) => e.stopPropagation()} className="mx-4 w-full max-w-lg rounded-2xl border border-zinc-800/60 bg-surface-2 p-6">
-
-        {/* Progress steps */}
-        <div className="mb-6 flex items-center gap-2">
-          {[1, 2, 3].map((s) => (
-            <div key={s} className="flex flex-1 items-center gap-2">
-              <div className={`flex h-7 w-7 items-center justify-center rounded-full text-xs font-bold ${step >= s ? "bg-primary text-white" : "bg-zinc-800 text-zinc-500"}`}>
-                {step > s ? "✓" : s}
-              </div>
-              <span className={`text-xs ${step >= s ? "text-zinc-200" : "text-zinc-500"}`}>
-                {s === 1 ? "Select Networks" : s === 2 ? "Configure" : "Deploy"}
-              </span>
-              {s < 3 && <div className={`h-0.5 flex-1 rounded ${step > s ? "bg-primary" : "bg-zinc-800"}`} />}
-            </div>
-          ))}
-        </div>
-
-        {/* Step 1: Select networks */}
-        {step === 1 && (
-          <div>
-            <h3 className="mb-3 text-sm font-semibold text-zinc-100">Chọn ad networks để deploy</h3>
-            <div className="space-y-2 mb-4">
-              {networks.map((n) => (
-                <button key={n.id} disabled={n.status === "disconnected"}
-                  onClick={() => setSelectedNetworks((prev) => prev.includes(n.id) ? prev.filter((x) => x !== n.id) : [...prev, n.id])}
-                  className={`flex w-full items-center gap-3 rounded-lg border p-3 text-left transition ${
-                    selectedNetworks.includes(n.id) ? "border-primary/40 bg-primary/5" : n.status === "disconnected" ? "border-zinc-800 bg-zinc-900/30 opacity-50" : "border-zinc-800/60 bg-surface-1 hover:border-zinc-700"
-                  }`}>
-                  <span className="text-lg">{n.logo}</span>
-                  <span className="flex-1 text-sm text-zinc-200">{n.name}</span>
-                  {n.status === "disconnected" ? (
-                    <span className="text-[10px] text-zinc-500">Not connected</span>
-                  ) : selectedNetworks.includes(n.id) ? (
-                    <CheckCircle2 className="h-4 w-4 text-primary" />
-                  ) : null}
-                </button>
+    <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}>
+      <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/60 backdrop-blur-sm" onClick={onClose}>
+        <motion.div initial={{ opacity: 0, scale: 0.95, y: 12 }} animate={{ opacity: 1, scale: 1, y: 0 }} exit={{ opacity: 0, scale: 0.95 }}>
+          <div className="mx-4 w-full max-w-lg rounded-2xl border border-zinc-800/60 bg-surface-2 p-6" onClick={(e) => e.stopPropagation()}>
+            {/* Progress steps */}
+            <div className="mb-6 flex items-center gap-2">
+              {[1, 2, 3].map((s) => (
+                <div key={s} className="flex flex-1 items-center gap-2">
+                  <div className={`flex h-7 w-7 items-center justify-center rounded-full text-xs font-bold ${step >= s ? "bg-primary text-white" : "bg-zinc-800 text-zinc-500"}`}>
+                    {step > s ? "✓" : s}
+                  </div>
+                  <span className={`text-xs ${step >= s ? "text-zinc-200" : "text-zinc-500"}`}>
+                    {s === 1 ? "Select Networks" : s === 2 ? "Configure" : "Deploy"}
+                  </span>
+                  {s < 3 && <div className={`h-0.5 flex-1 rounded ${step > s ? "bg-primary" : "bg-zinc-800"}`} />}
+                </div>
               ))}
             </div>
-            <button onClick={() => setStep(2)} disabled={selectedNetworks.length === 0}
-              className="w-full rounded-lg bg-primary py-2.5 text-sm font-medium text-white transition hover:bg-primary-dark disabled:opacity-50">
-              Continue → Configure ({selectedNetworks.length})
-            </button>
-          </div>
-        )}
 
-        {/* Step 2: Configure */}
-        {step === 2 && (
-          <div>
-            <h3 className="mb-3 text-sm font-semibold text-zinc-100">Cấu hình per-network</h3>
-            <div className="space-y-3 mb-4">
-              {selectedNetworks.map((nId) => {
-                const n = networks.find((x) => x.id === nId)!;
-                return (
-                  <div key={nId} className="rounded-lg border border-zinc-800/40 bg-surface-1 p-3">
-                    <div className="mb-2 flex items-center gap-2">
-                      <span>{n.logo}</span>
-                      <span className="text-sm font-medium text-zinc-200">{n.name}</span>
-                    </div>
-                    <div className="grid grid-cols-2 gap-2 text-xs">
-                      <div>
-                        <p className="mb-1 text-zinc-500">File format</p>
-                        <select className="h-7 w-full rounded border border-zinc-700 bg-surface-2 px-2 text-zinc-300 focus:outline-none">
-                          <option>MRAID 2.0</option><option>HTML5 Raw</option>
-                        </select>
-                      </div>
-                      <div>
-                        <p className="mb-1 text-zinc-500">Max size</p>
-                        <select className="h-7 w-full rounded border border-zinc-700 bg-surface-2 px-2 text-zinc-300 focus:outline-none">
-                          <option>3 MB</option><option>5 MB</option><option>10 MB</option>
-                        </select>
-                      </div>
-                    </div>
-                    <div className="mt-2 flex items-center gap-2">
-                      <CheckCircle2 className="h-3.5 w-3.5 text-success" />
-                      <span className="text-[10px] text-success">Validation passed — file meets network requirements</span>
-                    </div>
-                  </div>
-                );
-              })}
-            </div>
-            <div className="flex gap-2">
-              <button onClick={() => setStep(1)} className="flex-1 rounded-lg border border-zinc-800/60 py-2.5 text-sm text-zinc-400 hover:text-zinc-200">
-                ← Back
-              </button>
-              <button onClick={() => { setStep(3); startDeploy(); }}
-                className="flex-1 rounded-lg bg-primary py-2.5 text-sm font-medium text-white transition hover:bg-primary-dark">
-                🚀 Deploy Now
-              </button>
-            </div>
-          </div>
-        )}
-
-        {/* Step 3: Deploy progress */}
-        {step === 3 && (
-          <div>
-            <h3 className="mb-3 text-sm font-semibold text-zinc-100">Deploying to {selectedNetworks.length} networks</h3>
-            <div className="mb-4">
-              <div className="mb-2 h-2 overflow-hidden rounded-full bg-zinc-800">
-                <motion.div className="h-full bg-primary" animate={{ width: `${((deployStep + 1) / deploySteps.length) * 100}%` }} />
-              </div>
-              <div className="space-y-2">
-                {deploySteps.map((s, i) => (
-                  <div key={i} className="flex items-center gap-2 text-xs">
-                    {i < deployStep ? (
-                      <CheckCircle2 className="h-4 w-4 text-success" />
-                    ) : i === deployStep && deploying ? (
-                      <RefreshCw className="h-4 w-4 animate-spin text-primary" />
-                    ) : (
-                      <div className="h-4 w-4 rounded-full border border-zinc-700" />
-                    )}
-                    <span className={i <= deployStep ? "text-zinc-200" : "text-zinc-500"}>{s}</span>
-                  </div>
-                ))}
-              </div>
-            </div>
-            {deployStep >= deploySteps.length - 1 && (
-              <div className="space-y-2">
-                <div className="rounded-lg border border-success/30 bg-success/5 p-3 text-center">
-                  <p className="text-sm font-semibold text-success">🎉 Deploy thành công!</p>
-                  <p className="text-[11px] text-zinc-400">Creative đã được push đến {selectedNetworks.length} ad networks</p>
+            {/* Step 1: Select networks */}
+            {step === 1 && (
+              <div>
+                <h3 className="mb-3 text-sm font-semibold text-zinc-100">Chọn ad networks để deploy</h3>
+                <div className="space-y-2 mb-4">
+                  {networks.map((n) => (
+                    <button key={n.id} disabled={n.status === "disconnected"}
+                      onClick={() => setSelectedNetworks((prev) => prev.includes(n.id) ? prev.filter((x) => x !== n.id) : [...prev, n.id])}
+                      className={`flex w-full items-center gap-3 rounded-lg border p-3 text-left transition ${
+                        selectedNetworks.includes(n.id) ? "border-primary/40 bg-primary/5" : n.status === "disconnected" ? "border-zinc-800 bg-zinc-900/30 opacity-50" : "border-zinc-800/60 bg-surface-1 hover:border-zinc-700"
+                      }`}>
+                      <span className="text-lg">{n.logo}</span>
+                      <span className="flex-1 text-sm text-zinc-200">{n.name}</span>
+                      {n.status === "disconnected" ? (
+                        <span className="text-[10px] text-zinc-500">Not connected</span>
+                      ) : selectedNetworks.includes(n.id) ? (
+                        <CheckCircle2 className="h-4 w-4 text-primary" />
+                      ) : null}
+                    </button>
+                  ))}
                 </div>
-                <button onClick={onClose} className="w-full rounded-lg bg-primary py-2.5 text-sm font-medium text-white">
-                  Done
+                <button onClick={() => setStep(2)} disabled={selectedNetworks.length === 0}
+                  className="w-full rounded-lg bg-primary py-2.5 text-sm font-medium text-white transition hover:bg-primary-dark disabled:opacity-50">
+                  Continue → Configure ({selectedNetworks.length})
                 </button>
               </div>
             )}
+
+            {/* Step 2: Configure */}
+            {step === 2 && (
+              <div>
+                <h3 className="mb-3 text-sm font-semibold text-zinc-100">Cấu hình per-network</h3>
+                <div className="space-y-3 mb-4">
+                  {selectedNetworks.map((nId) => {
+                    const n = networks.find((x) => x.id === nId)!;
+                    return (
+                      <div key={nId} className="rounded-lg border border-zinc-800/40 bg-surface-1 p-3">
+                        <div className="mb-2 flex items-center gap-2">
+                          <span>{n.logo}</span>
+                          <span className="text-sm font-medium text-zinc-200">{n.name}</span>
+                        </div>
+                        <div className="grid grid-cols-2 gap-2 text-xs">
+                          <div>
+                            <p className="mb-1 text-zinc-500">File format</p>
+                            <select className="h-7 w-full rounded border border-zinc-700 bg-surface-2 px-2 text-zinc-300 focus:outline-none">
+                              <option>MRAID 2.0</option><option>HTML5 Raw</option>
+                            </select>
+                          </div>
+                          <div>
+                            <p className="mb-1 text-zinc-500">Max size</p>
+                            <select className="h-7 w-full rounded border border-zinc-700 bg-surface-2 px-2 text-zinc-300 focus:outline-none">
+                              <option>3 MB</option><option>5 MB</option><option>10 MB</option>
+                            </select>
+                          </div>
+                        </div>
+                        <div className="mt-2 flex items-center gap-2">
+                          <CheckCircle2 className="h-3.5 w-3.5 text-success" />
+                          <span className="text-[10px] text-success">Validation passed — file meets network requirements</span>
+                        </div>
+                      </div>
+                    );
+                  })}
+                </div>
+                <div className="flex gap-2">
+                  <button onClick={() => setStep(1)} className="flex-1 rounded-lg border border-zinc-800/60 py-2.5 text-sm text-zinc-400 hover:text-zinc-200">
+                    ← Back
+                  </button>
+                  <button onClick={() => { setStep(3); startDeploy(); }}
+                    className="flex-1 rounded-lg bg-primary py-2.5 text-sm font-medium text-white transition hover:bg-primary-dark">
+                    🚀 Deploy Now
+                  </button>
+                </div>
+              </div>
+            )}
+
+            {/* Step 3: Deploy progress */}
+            {step === 3 && (
+              <div>
+                <h3 className="mb-3 text-sm font-semibold text-zinc-100">Deploying to {selectedNetworks.length} networks</h3>
+                <div className="mb-4">
+                  <div className="mb-2 h-2 overflow-hidden rounded-full bg-zinc-800">
+                    <motion.div animate={{ width: `${((deployStep + 1) / deploySteps.length) * 100}%` }}>
+                      <div className="h-full bg-primary" style={{ height: '100%' }} />
+                    </motion.div>
+                  </div>
+                  <div className="space-y-2">
+                    {deploySteps.map((s, i) => (
+                      <div key={i} className="flex items-center gap-2 text-xs">
+                        {i < deployStep ? (
+                          <CheckCircle2 className="h-4 w-4 text-success" />
+                        ) : i === deployStep && deploying ? (
+                          <RefreshCw className="h-4 w-4 animate-spin text-primary" />
+                        ) : (
+                          <div className="h-4 w-4 rounded-full border border-zinc-700" />
+                        )}
+                        <span className={i <= deployStep ? "text-zinc-200" : "text-zinc-500"}>{s}</span>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+                {deployStep >= deploySteps.length - 1 && (
+                  <div className="space-y-2">
+                    <div className="rounded-lg border border-success/30 bg-success/5 p-3 text-center">
+                      <p className="text-sm font-semibold text-success">🎉 Deploy thành công!</p>
+                      <p className="text-[11px] text-zinc-400">Creative đã được push đến {selectedNetworks.length} ad networks</p>
+                    </div>
+                    <button onClick={onClose} className="w-full rounded-lg bg-primary py-2.5 text-sm font-medium text-white">
+                      Done
+                    </button>
+                  </div>
+                )}
+              </div>
+            )}
           </div>
-        )}
-      </motion.div>
+        </motion.div>
+      </div>
     </motion.div>
   );
 }

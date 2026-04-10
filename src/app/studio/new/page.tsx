@@ -32,6 +32,15 @@ interface GeneratedVariant {
   ctaText: string;
 }
 
+interface CampaignBrief {
+  gameName: string;
+  genre: string;
+  targetAudience: string;
+  objective: string;
+  variants: number;
+  prompt: string;
+}
+
 export default function NewStudioPage() {
   const router = useRouter();
   const [mode, setMode] = useState<CreationMode>(null);
@@ -113,47 +122,53 @@ export default function NewStudioPage() {
 
             <div className="grid gap-4 md:grid-cols-2">
               {/* Upload mode */}
-              <motion.button
+              <motion.div
                 whileHover={{ scale: 1.02 }}
                 whileTap={{ scale: 0.98 }}
-                onClick={() => setMode("upload")}
-                className="group rounded-2xl border border-zinc-800/60 bg-surface-2 p-8 text-left transition-all hover:border-primary/30 hover:shadow-glow"
               >
-                <div className="mb-4 flex h-16 w-16 items-center justify-center rounded-2xl bg-info/10 transition-colors group-hover:bg-info/20">
-                  <FileUp className="h-8 w-8 text-info" />
-                </div>
-                <h3 className="mb-2 text-lg font-semibold text-zinc-100">Upload Files</h3>
-                <p className="mb-4 text-sm text-zinc-400">
-                  Tải lên file HTML5 hoặc ZIP có sẵn. Hỗ trợ drag & drop nhiều file cùng lúc.
-                </p>
-                <div className="flex flex-wrap gap-1.5">
-                  {[".html", ".zip", "Batch upload", "Drag & drop"].map((tag) => (
-                    <span key={tag} className="rounded-md bg-zinc-800/60 px-2 py-0.5 text-[10px] text-zinc-400">{tag}</span>
-                  ))}
-                </div>
-              </motion.button>
+                <button
+                  onClick={() => setMode("upload")}
+                  className="group w-full h-full rounded-2xl border border-zinc-800/60 bg-surface-2 p-8 text-left transition-all hover:border-primary/30 hover:shadow-glow"
+                >
+                  <div className="mb-4 flex h-16 w-16 items-center justify-center rounded-2xl bg-info/10 transition-colors group-hover:bg-info/20">
+                    <FileUp className="h-8 w-8 text-info" />
+                  </div>
+                  <h3 className="mb-2 text-lg font-semibold text-zinc-100">Upload Files</h3>
+                  <p className="mb-4 text-sm text-zinc-400">
+                    Tải lên file HTML5 hoặc ZIP có sẵn. Hỗ trợ drag & drop nhiều file cùng lúc.
+                  </p>
+                  <div className="flex flex-wrap gap-1.5">
+                    {[".html", ".zip", "Batch upload", "Drag & drop"].map((tag) => (
+                      <span key={tag} className="rounded-md bg-zinc-800/60 px-2 py-0.5 text-[10px] text-zinc-400">{tag}</span>
+                    ))}
+                  </div>
+                </button>
+              </motion.div>
 
               {/* AI Generate mode */}
-              <motion.button
+              <motion.div
                 whileHover={{ scale: 1.02 }}
                 whileTap={{ scale: 0.98 }}
-                onClick={() => setMode("ai-generate")}
-                className="group relative overflow-hidden rounded-2xl border border-primary/30 bg-gradient-to-br from-primary/10 to-transparent p-8 text-left transition-all hover:border-primary/50 hover:shadow-glow-lg"
               >
-                <div className="absolute right-4 top-4 rounded-full bg-primary/20 px-2.5 py-1 text-[10px] font-bold text-primary">✨ Recommended</div>
-                <div className="mb-4 flex h-16 w-16 items-center justify-center rounded-2xl bg-primary/10 transition-colors group-hover:bg-primary/20">
-                  <Sparkles className="h-8 w-8 text-primary" />
-                </div>
-                <h3 className="mb-2 text-lg font-semibold text-zinc-100">AI Generate</h3>
-                <p className="mb-4 text-sm text-zinc-400">
-                  Mô tả campaign brief, AI sẽ sinh tạo 50 variant configurations tối ưu tự động.
-                </p>
-                <div className="flex flex-wrap gap-1.5">
-                  {["GPT-4o", "Auto-optimize", "50 variants", "Performance prediction"].map((tag) => (
-                    <span key={tag} className="rounded-md bg-primary/10 px-2 py-0.5 text-[10px] text-primary">{tag}</span>
-                  ))}
-                </div>
-              </motion.button>
+                <button
+                  onClick={() => setMode("ai-generate")}
+                  className="group relative w-full h-full overflow-hidden rounded-2xl border border-primary/30 bg-gradient-to-br from-primary/10 to-transparent p-8 text-left transition-all hover:border-primary/50 hover:shadow-glow-lg"
+                >
+                  <div className="absolute right-4 top-4 rounded-full bg-primary/20 px-2.5 py-1 text-[10px] font-bold text-primary">✨ Recommended</div>
+                  <div className="mb-4 flex h-16 w-16 items-center justify-center rounded-2xl bg-primary/10 transition-colors group-hover:bg-primary/20">
+                    <Sparkles className="h-8 w-8 text-primary" />
+                  </div>
+                  <h3 className="mb-2 text-lg font-semibold text-zinc-100">AI Generate</h3>
+                  <p className="mb-4 text-sm text-zinc-400">
+                    Mô tả campaign brief, AI sẽ sinh tạo 50 variant configurations tối ưu tự động.
+                  </p>
+                  <div className="flex flex-wrap gap-1.5">
+                    {["GPT-4o", "Auto-optimize", "50 variants", "Performance prediction"].map((tag) => (
+                      <span key={tag} className="rounded-md bg-primary/10 px-2 py-0.5 text-[10px] text-primary">{tag}</span>
+                    ))}
+                  </div>
+                </button>
+              </motion.div>
             </div>
           </div>
         )}
@@ -185,7 +200,9 @@ export default function NewStudioPage() {
                     <div className="flex-1 min-w-0">
                       <p className="truncate text-sm text-zinc-200">{f}</p>
                       <div className="mt-1 h-1.5 overflow-hidden rounded-full bg-zinc-800">
-                        <motion.div animate={{ width: "100%" }} transition={{ duration: 1.5 }} className="h-full bg-primary rounded-full" />
+                        <motion.div animate={{ width: "100%" }} transition={{ duration: 1.5 }}>
+                          <div className="h-full bg-primary rounded-full" style={{ height: '100%' }} />
+                        </motion.div>
                       </div>
                     </div>
                     <CheckCircle2 className="h-4 w-4 text-success" />
@@ -211,125 +228,132 @@ export default function NewStudioPage() {
             {/* Step: Brief */}
             {genStep === "brief" && (
               <motion.div initial={{ opacity: 0, y: 12 }} animate={{ opacity: 1, y: 0 }}>
-                <div className="mb-6 flex items-center gap-3">
-                  <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-primary/10">
-                    <Brain className="h-5 w-5 text-primary" />
+                <div className="campaign-brief-container">
+                  <div className="mb-6 flex items-center gap-3">
+                    <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-primary/10">
+                      <Brain className="h-5 w-5 text-primary" />
+                    </div>
+                    <div>
+                      <h2 className="text-xl font-bold text-zinc-100">Campaign Brief</h2>
+                      <p className="text-xs text-zinc-500">Mô tả mục tiêu, AI sẽ sinh tạo variants tối ưu</p>
+                    </div>
                   </div>
-                  <div>
-                    <h2 className="text-xl font-bold text-zinc-100">Campaign Brief</h2>
-                    <p className="text-xs text-zinc-500">Mô tả mục tiêu, AI sẽ sinh tạo variants tối ưu</p>
-                  </div>
-                </div>
 
-                <div className="space-y-4 rounded-xl border border-zinc-800/60 bg-surface-2 p-6">
-                  <div className="grid grid-cols-2 gap-4">
-                    <div>
-                      <label className="mb-1.5 block text-xs font-medium text-zinc-400">Game Name</label>
-                      <input value={brief.gameName} onChange={(e) => setBrief({ ...brief, gameName: e.target.value })}
-                        placeholder="VD: iG Water Factory"
-                        className="h-9 w-full rounded-lg border border-zinc-700 bg-surface-1 px-3 text-sm text-zinc-200 placeholder:text-zinc-600 focus:border-primary/40 focus:outline-none" />
+                  <div className="space-y-4 rounded-xl border border-zinc-800/60 bg-surface-2 p-6">
+                    <div className="grid grid-cols-2 gap-4">
+                      <div>
+                        <label className="mb-1.5 block text-xs font-medium text-zinc-400">Game Name</label>
+                        <input value={brief.gameName} onChange={(e) => setBrief({ ...brief, gameName: e.target.value })}
+                          placeholder="VD: iG Water Factory"
+                          className="h-9 w-full rounded-lg border border-zinc-700 bg-surface-1 px-3 text-sm text-zinc-200 placeholder:text-zinc-600 focus:border-primary/40 focus:outline-none" />
+                      </div>
+                      <div>
+                        <label className="mb-1.5 block text-xs font-medium text-zinc-400">Genre</label>
+                        <select value={brief.genre} onChange={(e) => setBrief({ ...brief, genre: e.target.value })}
+                          className="h-9 w-full rounded-lg border border-zinc-700 bg-surface-1 px-3 text-sm text-zinc-200 focus:outline-none">
+                          <option value="puzzle">Puzzle</option>
+                          <option value="match3">Match 3</option>
+                          <option value="runner">Runner</option>
+                          <option value="merge">Merge</option>
+                          <option value="idle">Idle</option>
+                          <option value="shooter">Shooter</option>
+                        </select>
+                      </div>
+                      <div>
+                        <label className="mb-1.5 block text-xs font-medium text-zinc-400">Target Audience</label>
+                        <select value={brief.targetAudience} onChange={(e) => setBrief({ ...brief, targetAudience: e.target.value })}
+                          className="h-9 w-full rounded-lg border border-zinc-700 bg-surface-1 px-3 text-sm text-zinc-200 focus:outline-none">
+                          <option value="casual-women-25-45">Casual · Women 25-45</option>
+                          <option value="casual-all-18-35">Casual · All 18-35</option>
+                          <option value="midcore-men-18-35">Midcore · Men 18-35</option>
+                          <option value="hardcore-men-18-30">Hardcore · Men 18-30</option>
+                        </select>
+                      </div>
+                      <div>
+                        <label className="mb-1.5 block text-xs font-medium text-zinc-400">Campaign Objective</label>
+                        <select value={brief.objective} onChange={(e) => setBrief({ ...brief, objective: e.target.value })}
+                          className="h-9 w-full rounded-lg border border-zinc-700 bg-surface-1 px-3 text-sm text-zinc-200 focus:outline-none">
+                          <option value="installs">Maximize Installs</option>
+                          <option value="ctr">Maximize CTR</option>
+                          <option value="roas">Maximize ROAS</option>
+                          <option value="engagement">Maximize Engagement</option>
+                        </select>
+                      </div>
                     </div>
                     <div>
-                      <label className="mb-1.5 block text-xs font-medium text-zinc-400">Genre</label>
-                      <select value={brief.genre} onChange={(e) => setBrief({ ...brief, genre: e.target.value })}
-                        className="h-9 w-full rounded-lg border border-zinc-700 bg-surface-1 px-3 text-sm text-zinc-200 focus:outline-none">
-                        <option value="puzzle">Puzzle</option>
-                        <option value="match3">Match 3</option>
-                        <option value="runner">Runner</option>
-                        <option value="merge">Merge</option>
-                        <option value="idle">Idle</option>
-                        <option value="shooter">Shooter</option>
-                      </select>
+                      <label className="mb-1.5 block text-xs font-medium text-zinc-400">Number of Variants</label>
+                      <div className="flex items-center gap-3">
+                        <input type="range" min={10} max={100} step={10} value={brief.variants}
+                          onChange={(e) => setBrief({ ...brief, variants: +e.target.value })}
+                          className="flex-1" />
+                        <span className="w-12 rounded bg-surface-1 py-1 text-center text-sm font-bold text-primary">{brief.variants}</span>
+                      </div>
                     </div>
                     <div>
-                      <label className="mb-1.5 block text-xs font-medium text-zinc-400">Target Audience</label>
-                      <select value={brief.targetAudience} onChange={(e) => setBrief({ ...brief, targetAudience: e.target.value })}
-                        className="h-9 w-full rounded-lg border border-zinc-700 bg-surface-1 px-3 text-sm text-zinc-200 focus:outline-none">
-                        <option value="casual-women-25-45">Casual · Women 25-45</option>
-                        <option value="casual-all-18-35">Casual · All 18-35</option>
-                        <option value="midcore-men-18-35">Midcore · Men 18-35</option>
-                        <option value="hardcore-men-18-30">Hardcore · Men 18-30</option>
-                      </select>
-                    </div>
-                    <div>
-                      <label className="mb-1.5 block text-xs font-medium text-zinc-400">Campaign Objective</label>
-                      <select value={brief.objective} onChange={(e) => setBrief({ ...brief, objective: e.target.value })}
-                        className="h-9 w-full rounded-lg border border-zinc-700 bg-surface-1 px-3 text-sm text-zinc-200 focus:outline-none">
-                        <option value="installs">Maximize Installs</option>
-                        <option value="ctr">Maximize CTR</option>
-                        <option value="roas">Maximize ROAS</option>
-                        <option value="engagement">Maximize Engagement</option>
-                      </select>
+                      <label className="mb-1.5 block text-xs font-medium text-zinc-400">Additional Instructions (Optional)</label>
+                      <textarea value={brief.prompt} onChange={(e) => setBrief({ ...brief, prompt: e.target.value })}
+                        rows={3} placeholder="VD: Focus on warm colors, use 3-step tutorial, avoid complex game mechanics..."
+                        className="w-full rounded-lg border border-zinc-700 bg-surface-1 px-3 py-2 text-sm text-zinc-200 placeholder:text-zinc-600 focus:border-primary/40 focus:outline-none" />
                     </div>
                   </div>
-                  <div>
-                    <label className="mb-1.5 block text-xs font-medium text-zinc-400">Number of Variants</label>
-                    <div className="flex items-center gap-3">
-                      <input type="range" min={10} max={100} step={10} value={brief.variants}
-                        onChange={(e) => setBrief({ ...brief, variants: +e.target.value })}
-                        className="flex-1" />
-                      <span className="w-12 rounded bg-surface-1 py-1 text-center text-sm font-bold text-primary">{brief.variants}</span>
-                    </div>
-                  </div>
-                  <div>
-                    <label className="mb-1.5 block text-xs font-medium text-zinc-400">Additional Instructions (Optional)</label>
-                    <textarea value={brief.prompt} onChange={(e) => setBrief({ ...brief, prompt: e.target.value })}
-                      rows={3} placeholder="VD: Focus on warm colors, use 3-step tutorial, avoid complex game mechanics..."
-                      className="w-full rounded-lg border border-zinc-700 bg-surface-1 px-3 py-2 text-sm text-zinc-200 placeholder:text-zinc-600 focus:border-primary/40 focus:outline-none" />
-                  </div>
-                </div>
 
-                {/* AI context panel */}
-                <div className="mt-4 rounded-xl border border-primary/20 bg-primary/5 p-4">
-                  <div className="mb-2 flex items-center gap-2 text-xs font-medium text-primary">
-                    <Lightbulb className="h-4 w-4" /> AI sẽ sử dụng context sau:
+                  {/* AI context panel */}
+                  <div className="mt-4 rounded-xl border border-primary/20 bg-primary/5 p-4">
+                    <div className="mb-2 flex items-center gap-2 text-xs font-medium text-primary">
+                      <Lightbulb className="h-4 w-4" /> AI sẽ sử dụng context sau:
+                    </div>
+                    <div className="flex flex-wrap gap-2 text-[11px]">
+                      <span className="rounded bg-primary/10 px-2 py-1 text-zinc-300">📊 14,200 historical performance samples</span>
+                      <span className="rounded bg-primary/10 px-2 py-1 text-zinc-300">🏆 Top 10 winning patterns</span>
+                      <span className="rounded bg-primary/10 px-2 py-1 text-zinc-300">🌐 3 connected ad networks data</span>
+                      <span className="rounded bg-primary/10 px-2 py-1 text-zinc-300">🎯 Audience-genre match score</span>
+                    </div>
                   </div>
-                  <div className="flex flex-wrap gap-2 text-[11px]">
-                    <span className="rounded bg-primary/10 px-2 py-1 text-zinc-300">📊 14,200 historical performance samples</span>
-                    <span className="rounded bg-primary/10 px-2 py-1 text-zinc-300">🏆 Top 10 winning patterns</span>
-                    <span className="rounded bg-primary/10 px-2 py-1 text-zinc-300">🌐 3 connected ad networks data</span>
-                    <span className="rounded bg-primary/10 px-2 py-1 text-zinc-300">🎯 Audience-genre match score</span>
-                  </div>
-                </div>
 
-                <button onClick={startGeneration}
-                  className="mt-6 flex w-full items-center justify-center gap-2 rounded-lg bg-gradient-to-r from-primary to-primary-light py-3 text-sm font-bold text-white shadow-glow transition hover:shadow-glow-lg">
-                  <Sparkles className="h-4 w-4" /> Generate {brief.variants} Variants
-                </button>
+                  <button onClick={startGeneration}
+                    className="mt-6 flex w-full items-center justify-center gap-2 rounded-lg bg-gradient-to-r from-primary to-primary-light py-3 text-sm font-bold text-white shadow-glow transition hover:shadow-glow-lg">
+                    <Sparkles className="h-4 w-4" /> Generate {brief.variants} Variants
+                  </button>
+                </div>
               </motion.div>
             )}
 
             {/* Step: Generating */}
             {genStep === "generating" && (
-              <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} className="py-12 text-center">
-                <motion.div animate={{ rotate: 360 }} transition={{ duration: 2, repeat: Infinity, ease: "linear" }}
-                  className="mx-auto mb-6 flex h-20 w-20 items-center justify-center rounded-full border-2 border-primary/30 bg-primary/10">
-                  <Sparkles className="h-8 w-8 text-primary" />
-                </motion.div>
-                <h3 className="mb-2 text-lg font-semibold text-zinc-100">AI đang sinh tạo variants...</h3>
-                <p className="mb-6 text-sm text-zinc-400">Đang phân tích historical data và tối ưu configurations</p>
-
-                <div className="mx-auto max-w-md">
-                  <div className="mb-3 h-2 overflow-hidden rounded-full bg-zinc-800">
-                    <motion.div className="h-full bg-gradient-to-r from-primary to-primary-light" style={{ width: `${genProgress}%` }} />
-                  </div>
-                  <p className="text-sm font-medium text-primary">{Math.round(genProgress)}%</p>
-                </div>
-
-                <div className="mx-auto mt-6 max-w-md space-y-1.5 text-left">
-                  {[
-                    { text: "Analyzing campaign brief...", done: genProgress > 15 },
-                    { text: "Loading historical performance data...", done: genProgress > 30 },
-                    { text: "Identifying winning patterns...", done: genProgress > 50 },
-                    { text: "Generating variant configurations...", done: genProgress > 70 },
-                    { text: "Running performance predictions...", done: genProgress > 85 },
-                    { text: "Ranking and filtering results...", done: genProgress > 95 },
-                  ].map((s, i) => (
-                    <div key={i} className="flex items-center gap-2 text-xs">
-                      {s.done ? <CheckCircle2 className="h-4 w-4 text-success" /> : genProgress > (i * 15) ? <Loader2 className="h-4 w-4 animate-spin text-primary" /> : <div className="h-4 w-4 rounded-full border border-zinc-700" />}
-                      <span className={s.done ? "text-zinc-200" : "text-zinc-500"}>{s.text}</span>
+              <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }}>
+                <div className="py-12 text-center">
+                  <motion.div animate={{ rotate: 360 }} transition={{ duration: 2, repeat: Infinity, ease: "linear" }}>
+                    <div className="mx-auto mb-6 flex h-20 w-20 items-center justify-center rounded-full border-2 border-primary/30 bg-primary/10">
+                      <Sparkles className="h-8 w-8 text-primary" />
                     </div>
-                  ))}
+                  </motion.div>
+                  <h3 className="mb-2 text-lg font-semibold text-zinc-100">AI đang sinh tạo variants...</h3>
+                  <p className="mb-6 text-sm text-zinc-400">Đang phân tích historical data và tối ưu configurations</p>
+
+                  <div className="mx-auto max-w-md">
+                    <div className="mb-3 h-2 overflow-hidden rounded-full bg-zinc-800">
+                      <motion.div style={{ width: `${genProgress}%`, height: '100%' }}>
+                        <div className="h-full bg-gradient-to-r from-primary to-primary-light" />
+                      </motion.div>
+                    </div>
+                    <p className="text-sm font-medium text-primary">{Math.round(genProgress)}%</p>
+                  </div>
+
+                  <div className="mx-auto mt-6 max-w-md space-y-1.5 text-left">
+                    {[
+                      { text: "Analyzing campaign brief...", done: genProgress > 15 },
+                      { text: "Loading historical performance data...", done: genProgress > 30 },
+                      { text: "Identifying winning patterns...", done: genProgress > 50 },
+                      { text: "Generating variant configurations...", done: genProgress > 70 },
+                      { text: "Running performance predictions...", done: genProgress > 85 },
+                      { text: "Ranking and filtering results...", done: genProgress > 95 },
+                    ].map((s, i) => (
+                      <div key={i} className="flex items-center gap-2 text-xs">
+                        {s.done ? <CheckCircle2 className="h-4 w-4 text-success" /> : genProgress > (i * 15) ? <Loader2 className="h-4 w-4 animate-spin text-primary" /> : <div className="h-4 w-4 rounded-full border border-zinc-700" />}
+                        <span className={s.done ? "text-zinc-200" : "text-zinc-500"}>{s.text}</span>
+                      </div>
+                    ))}
+                  </div>
                 </div>
               </motion.div>
             )}
@@ -387,7 +411,9 @@ function MiniAdPreview({ variant, index }: { variant: GeneratedVariant; index: n
               return (
                 <motion.div key={i} initial={{ height: 0 }} animate={{ height: h }}
                   transition={{ delay: i * 0.04 + index * 0.02, duration: 0.3 }}
-                  className="w-3 rounded-t" style={{ background: `hsl(${(hue + i * 55) % 360}, 65%, 50%)` }} />
+                >
+                  <div className="w-3 h-full rounded-t" style={{ background: `hsl(${(hue + i * 55) % 360}, 65%, 50%)` }} />
+                </motion.div>
               );
             })}
           </div>
@@ -396,9 +422,11 @@ function MiniAdPreview({ variant, index }: { variant: GeneratedVariant; index: n
             {[...Array(gridCount)].map((_, i) => (
               <motion.div key={i} initial={{ scale: 0 }} animate={{ scale: 1 }}
                 transition={{ delay: i * 0.02 + index * 0.01, duration: 0.2 }}
-                className="flex h-5 w-5 items-center justify-center rounded text-[9px]"
-                style={{ background: `hsl(${(hue + i * 40) % 360}, 55%, 25%)`, border: `1px solid hsl(${(hue + i * 40) % 360}, 35%, 35%)` }}>
-                {icons[i % icons.length]}
+              >
+                <div className="flex h-5 w-5 items-center justify-center rounded text-[9px]"
+                  style={{ background: `hsl(${(hue + i * 40) % 360}, 55%, 25%)`, border: `1px solid hsl(${(hue + i * 40) % 360}, 35%, 35%)` }}>
+                  {icons[i % icons.length]}
+                </div>
               </motion.div>
             ))}
           </div>
@@ -415,7 +443,7 @@ function MiniAdPreview({ variant, index }: { variant: GeneratedVariant; index: n
   );
 }
 
-function ResultsGallery({ variants }: { variants: GeneratedVariant[] }) {
+function ResultsGallery({ variants, brief }: { variants: GeneratedVariant[]; brief: CampaignBrief }) {
   const [selectedIds, setSelectedIds] = useState<string[]>([]);
   const [filterMech, setFilterMech] = useState("all");
   const router = useRouter();
@@ -430,8 +458,8 @@ function ResultsGallery({ variants }: { variants: GeneratedVariant[] }) {
       {/* Header */}
       <div className="mb-4 flex flex-wrap items-center justify-between gap-3">
         <div>
-          <h2 className="text-xl font-bold text-zinc-100">Generation Complete! 🎉</h2>
-          <p className="text-sm text-zinc-400">{variants.length} variants ranked by AI predicted performance</p>
+          <h2 className="text-xl font-bold text-zinc-100">Generation Complete for {brief.gameName}! 🎉</h2>
+          <p className="text-sm text-zinc-400">{variants.length} variants ranked by AI predicted performance for {brief.genre} audience</p>
         </div>
         <button onClick={() => router.push("/studio/pa-1")} disabled={selectedIds.length === 0}
           className="flex items-center gap-2 rounded-lg bg-primary px-5 py-2.5 text-sm font-semibold text-white transition hover:bg-primary-dark disabled:opacity-40">
@@ -470,44 +498,47 @@ function ResultsGallery({ variants }: { variants: GeneratedVariant[] }) {
               initial={{ opacity: 0, scale: 0.95 }}
               animate={{ opacity: 1, scale: 1 }}
               transition={{ delay: Math.min(i * 0.02, 0.4), duration: 0.2 }}
-              onClick={() => toggle(v.id)}
-              className={`group relative cursor-pointer rounded-xl border p-1.5 transition-all duration-150 ${
-                sel ? "border-primary/50 bg-primary/5 ring-1 ring-primary/20" : "border-zinc-800/60 bg-surface-2 hover:border-zinc-700"
-              }`}
             >
-              {/* Checkbox */}
-              <div className={`absolute right-2.5 top-2.5 z-10 flex h-5 w-5 items-center justify-center rounded-full border-2 transition ${
-                sel ? "border-primary bg-primary text-white" : "border-zinc-600 bg-black/60 text-transparent group-hover:border-zinc-400"
-              }`}>
-                <CheckCircle2 className="h-3 w-3" />
-              </div>
-
-              {/* Mini preview */}
-              <MiniAdPreview variant={v} index={globalIndex} />
-
-              {/* Name + CTR */}
-              <div className="mt-1.5 flex items-center justify-between px-0.5">
-                <p className="truncate text-[10px] font-medium text-zinc-300">{v.name}</p>
-                <span className={`shrink-0 rounded px-1.5 py-0.5 text-[9px] font-bold ${
-                  v.ctr >= 4.0 ? "bg-emerald-500/15 text-emerald-400" : "bg-orange-500/15 text-orange-300"
+              <div
+                onClick={() => toggle(v.id)}
+                className={`group relative cursor-pointer rounded-xl border p-1.5 transition-all duration-150 ${
+                  sel ? "border-primary/50 bg-primary/5 ring-1 ring-primary/20" : "border-zinc-800/60 bg-surface-2 hover:border-zinc-700"
+                }`}
+              >
+                {/* Checkbox */}
+                <div className={`absolute right-2.5 top-2.5 z-10 flex h-5 w-5 items-center justify-center rounded-full border-2 transition ${
+                  sel ? "border-primary bg-primary text-white" : "border-zinc-600 bg-black/60 text-transparent group-hover:border-zinc-400"
                 }`}>
-                  {v.ctr.toFixed(1)}%
-                </span>
-              </div>
+                  <CheckCircle2 className="h-3 w-3" />
+                </div>
 
-              {/* Stats */}
-              <div className="mt-1 grid grid-cols-3 gap-1">
-                <div className="rounded bg-zinc-900/80 px-1 py-0.5 text-center">
-                  <p className="text-[6px] text-zinc-500">CTR</p>
-                  <p className="text-[9px] font-bold text-orange-300">{v.ctr.toFixed(1)}%</p>
+                {/* Mini preview */}
+                <MiniAdPreview variant={v} index={globalIndex} />
+
+                {/* Name + CTR */}
+                <div className="mt-1.5 flex items-center justify-between px-0.5">
+                  <p className="truncate text-[10px] font-medium text-zinc-300">{v.name}</p>
+                  <span className={`shrink-0 rounded px-1.5 py-0.5 text-[9px] font-bold ${
+                    v.ctr >= 4.0 ? "bg-emerald-500/15 text-emerald-400" : "bg-orange-500/15 text-orange-300"
+                  }`}>
+                    {v.ctr.toFixed(1)}%
+                  </span>
                 </div>
-                <div className="rounded bg-zinc-900/80 px-1 py-0.5 text-center">
-                  <p className="text-[6px] text-zinc-500">CVR</p>
-                  <p className="text-[9px] font-bold text-zinc-300">{v.cvr.toFixed(1)}%</p>
-                </div>
-                <div className="rounded bg-zinc-900/80 px-1 py-0.5 text-center">
-                  <p className="text-[6px] text-zinc-500">Score</p>
-                  <p className={`text-[9px] font-bold ${v.score >= 85 ? "text-emerald-400" : "text-zinc-300"}`}>{v.score}</p>
+
+                {/* Stats */}
+                <div className="mt-1 grid grid-cols-3 gap-1">
+                  <div className="rounded bg-zinc-900/80 px-1 py-0.5 text-center">
+                    <p className="text-[6px] text-zinc-500">CTR</p>
+                    <p className="text-[9px] font-bold text-orange-300">{v.ctr.toFixed(1)}%</p>
+                  </div>
+                  <div className="rounded bg-zinc-900/80 px-1 py-0.5 text-center">
+                    <p className="text-[6px] text-zinc-500">CVR</p>
+                    <p className="text-[9px] font-bold text-zinc-300">{v.cvr.toFixed(1)}%</p>
+                  </div>
+                  <div className="rounded bg-zinc-900/80 px-1 py-0.5 text-center">
+                    <p className="text-[6px] text-zinc-500">Score</p>
+                    <p className={`text-[9px] font-bold ${v.score >= 85 ? "text-emerald-400" : "text-zinc-300"}`}>{v.score}</p>
+                  </div>
                 </div>
               </div>
             </motion.div>

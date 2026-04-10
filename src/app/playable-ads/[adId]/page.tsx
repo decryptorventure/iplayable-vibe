@@ -158,57 +158,58 @@ export default function PlayableAdDetailPage({ params }: { params: { adId: strin
               initial={{ opacity: 0, y: 8 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: Math.min(i * 0.04, 0.3) }}
-              className="group relative"
             >
-              <Link href={`/studio/${ad.id}?variant=${variant.id}`}>
-                <div className="rounded-xl border border-zinc-800/60 bg-surface-2 p-4 transition-all hover:border-primary/30 hover:shadow-glow">
-                  {/* Thumbnail placeholder */}
-                  <div className="relative mb-3 flex h-32 items-center justify-center rounded-lg border border-zinc-800/40 bg-surface-1">
-                    <div className="text-center">
-                      <FileCode className="mx-auto mb-1 h-6 w-6 text-zinc-600" />
-                      <p className="text-[10px] text-zinc-500">Playable Ad</p>
-                    </div>
-                    {variant.pinned && (
-                      <span className="absolute right-2 top-2 rounded bg-info/20 px-1.5 py-0.5 text-[9px] font-medium text-info">📌 Pinned</span>
-                    )}
-                    {/* Quick actions */}
-                    <div className="absolute right-2 bottom-2 flex gap-1 opacity-0 transition-opacity group-hover:opacity-100">
-                      <button onClick={(e) => { e.preventDefault(); }} className="rounded bg-zinc-800/90 p-1 text-zinc-400 hover:text-zinc-200">
-                        <Pencil className="h-3 w-3" />
-                      </button>
-                      <button onClick={(e) => { e.preventDefault(); }} className="rounded bg-zinc-800/90 p-1 text-zinc-400 hover:text-zinc-200">
-                        <Copy className="h-3 w-3" />
-                      </button>
-                      <button onClick={(e) => { e.preventDefault(); }} className="rounded bg-zinc-800/90 p-1 text-zinc-400 hover:text-danger">
-                        <Trash2 className="h-3 w-3" />
-                      </button>
-                    </div>
-                  </div>
-
-                  {/* Info */}
-                  <div className="mb-2 flex items-start justify-between gap-2">
-                    <div className="min-w-0 flex-1">
-                      <h4 className="truncate text-sm font-semibold text-zinc-100">{variant.name}</h4>
-                      <p className="truncate text-[11px] text-zinc-500">{variant.desc}</p>
-                    </div>
-                    <StatusBadge status={variant.status} />
-                  </div>
-
-                  <div className="space-y-1 text-[11px] text-zinc-500">
-                    <div className="flex items-center gap-1.5">
-                      <User className="h-3 w-3" /> Người sửa đổi: <span className="text-zinc-300">{variant.author}</span>
-                    </div>
-                    <div className="flex items-center gap-1.5">
-                      <Clock className="h-3 w-3" /> Sửa đổi lần cuối: <span className="text-primary">{variant.lastModified}</span>
-                    </div>
-                    {variant.ctr && (
-                      <div className="flex items-center gap-1.5">
-                        <Eye className="h-3 w-3" /> CTR: <span className="font-medium text-success">{variant.ctr}%</span>
+              <div className="group relative">
+                <Link href={`/studio/${ad.id}?variant=${variant.id}`}>
+                  <div className="rounded-xl border border-zinc-800/60 bg-surface-2 p-4 transition-all hover:border-primary/30 hover:shadow-glow">
+                    {/* Thumbnail placeholder */}
+                    <div className="relative mb-3 flex h-32 items-center justify-center rounded-lg border border-zinc-800/40 bg-surface-1">
+                      <div className="text-center">
+                        <FileCode className="mx-auto mb-1 h-6 w-6 text-zinc-600" />
+                        <p className="text-[10px] text-zinc-500">Playable Ad</p>
                       </div>
-                    )}
+                      {variant.pinned && (
+                        <span className="absolute right-2 top-2 rounded bg-info/20 px-1.5 py-0.5 text-[9px] font-medium text-info">📌 Pinned</span>
+                      )}
+                      {/* Quick actions */}
+                      <div className="absolute right-2 bottom-2 flex gap-1 opacity-0 transition-opacity group-hover:opacity-100">
+                        <button onClick={(e) => { e.preventDefault(); }} className="rounded bg-zinc-800/90 p-1 text-zinc-400 hover:text-zinc-200">
+                          <Pencil className="h-3 w-3" />
+                        </button>
+                        <button onClick={(e) => { e.preventDefault(); }} className="rounded bg-zinc-800/90 p-1 text-zinc-400 hover:text-zinc-200">
+                          <Copy className="h-3 w-3" />
+                        </button>
+                        <button onClick={(e) => { e.preventDefault(); }} className="rounded bg-zinc-800/90 p-1 text-zinc-400 hover:text-danger">
+                          <Trash2 className="h-3 w-3" />
+                        </button>
+                      </div>
+                    </div>
+
+                    {/* Info */}
+                    <div className="mb-2 flex items-start justify-between gap-2">
+                      <div className="min-w-0 flex-1">
+                        <h4 className="truncate text-sm font-semibold text-zinc-100">{variant.name}</h4>
+                        <p className="truncate text-[11px] text-zinc-500">{variant.desc}</p>
+                      </div>
+                      <StatusBadge status={variant.status} />
+                    </div>
+
+                    <div className="space-y-1 text-[11px] text-zinc-500">
+                      <div className="flex items-center gap-1.5">
+                        <User className="h-3 w-3" /> Người sửa đổi: <span className="text-zinc-300">{variant.author}</span>
+                      </div>
+                      <div className="flex items-center gap-1.5">
+                        <Clock className="h-3 w-3" /> Sửa đổi lần cuối: <span className="text-primary">{variant.lastModified}</span>
+                      </div>
+                      {variant.ctr && (
+                        <div className="flex items-center gap-1.5">
+                          <Eye className="h-3 w-3" /> CTR: <span className="font-medium text-success">{variant.ctr}%</span>
+                        </div>
+                      )}
+                    </div>
                   </div>
-                </div>
-              </Link>
+                </Link>
+              </div>
             </motion.div>
           ))}
         </div>

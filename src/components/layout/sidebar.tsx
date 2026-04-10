@@ -41,8 +41,8 @@ export function Sidebar() {
     <motion.aside
       animate={{ width: collapsed ? 68 : 240 }}
       transition={{ duration: 0.2, ease: "easeInOut" }}
-      className="flex h-screen flex-col border-r border-zinc-800/60 bg-surface-1 px-2 py-4"
     >
+      <div className="flex h-screen flex-col border-r border-zinc-800/60 bg-surface-1 px-2 py-4">
       {/* Logo */}
       <div className="mb-2 flex items-center gap-2.5 px-2">
         <div className="flex h-9 w-9 shrink-0 items-center justify-center rounded-xl bg-gradient-to-br from-primary to-primary-light shadow-glow">
@@ -55,17 +55,18 @@ export function Sidebar() {
               animate={{ opacity: 1, x: 0 }}
               exit={{ opacity: 0, x: -8 }}
               transition={{ duration: 0.15 }}
-              className="flex flex-col"
             >
-              <span className="text-sm font-bold tracking-wide text-zinc-100">
-                iPlayable
-              </span>
-              <span className="text-[10px] font-medium text-zinc-500">
-                AI Studio
-              </span>
+              <div className="flex flex-col">
+                <span className="text-sm font-bold tracking-wide text-zinc-100">
+                  iPlayable
+                </span>
+                <span className="text-[10px] font-medium text-zinc-500">
+                  AI Studio
+                </span>
+              </div>
             </motion.div>
-          )}
-        </AnimatePresence>
+            )}
+          </AnimatePresence>
       </div>
 
       {/* Quick Create */}
@@ -74,13 +75,14 @@ export function Sidebar() {
           <motion.div
             whileHover={{ scale: 1.02 }}
             whileTap={{ scale: 0.98 }}
-            className={cn(
+          >
+            <div className={cn(
               "flex items-center justify-center gap-2 rounded-xl bg-gradient-to-r from-primary to-primary-light px-3 py-2.5 text-sm font-semibold text-white shadow-glow transition-shadow hover:shadow-glow-lg",
               collapsed && "px-0"
-            )}
-          >
-            <Plus className="h-4 w-4 shrink-0" />
-            {!collapsed && <span>Quick Create</span>}
+            )}>
+              <Plus className="h-4 w-4 shrink-0" />
+              {!collapsed && <span>Quick Create</span>}
+            </div>
           </motion.div>
         </Link>
       </div>
@@ -95,33 +97,36 @@ export function Sidebar() {
             <Link key={`${item.label}-${item.href}`} href={item.href}>
               <motion.div
                 whileHover={{ x: 2 }}
-                className={cn(
+              >
+                <div className={cn(
                   "group relative flex items-center gap-3 rounded-lg px-3 py-2.5 text-sm transition-all duration-150",
                   active
                     ? "bg-zinc-800/80 text-zinc-100"
                     : "text-zinc-400 hover:bg-zinc-800/40 hover:text-zinc-200"
-                )}
-              >
-                {active && (
-                  <motion.span
-                    layoutId="sidebar-indicator"
-                    className="absolute left-0 top-1.5 h-6 w-[3px] rounded-r-full bg-gradient-to-b from-primary to-primary-light"
-                    transition={{ type: "spring", bounce: 0.2, duration: 0.4 }}
-                  />
-                )}
-                <Icon className={cn("h-[18px] w-[18px] shrink-0", active && "text-primary")} />
-                <AnimatePresence>
-                  {!collapsed && (
+                )}>
+                  {active && (
                     <motion.span
-                      initial={{ opacity: 0 }}
-                      animate={{ opacity: 1 }}
-                      exit={{ opacity: 0 }}
-                      className="font-medium"
+                      layoutId="sidebar-indicator"
+                      transition={{ type: "spring", bounce: 0.2, duration: 0.4 }}
                     >
-                      {item.label}
+                      <div className="absolute left-0 top-1.5 h-6 w-[3px] rounded-r-full bg-gradient-to-b from-primary to-primary-light" />
                     </motion.span>
                   )}
-                </AnimatePresence>
+                  <Icon className={cn("h-[18px] w-[18px] shrink-0", active && "text-primary")} />
+                  <AnimatePresence>
+                    {!collapsed && (
+                      <motion.span
+                        initial={{ opacity: 0 }}
+                        animate={{ opacity: 1 }}
+                        exit={{ opacity: 0 }}
+                      >
+                        <span className="font-medium">
+                          {item.label}
+                        </span>
+                      </motion.span>
+                    )}
+                  </AnimatePresence>
+                </div>
               </motion.div>
             </Link>
           );
@@ -169,6 +174,7 @@ export function Sidebar() {
               </p>
             </div>
           )}
+        </div>
         </div>
       </div>
     </motion.aside>

@@ -95,11 +95,12 @@ export default function TeamPage() {
             { label: "Editors", value: members.filter((m) => m.role === "Editor").length.toString(), icon: Edit3, color: "text-info" },
             { label: "Viewers", value: members.filter((m) => m.role === "Viewer").length.toString(), icon: Eye, color: "text-zinc-400" },
           ].map((stat, i) => (
-            <motion.div key={stat.label} initial={{ opacity: 0, y: 12 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: i * 0.05 }}
-              className="rounded-xl border border-zinc-800/60 bg-surface-2 p-4">
-              <stat.icon className={`mb-2 h-5 w-5 ${stat.color}`} />
-              <p className="text-lg font-bold text-zinc-100">{stat.value}</p>
-              <p className="text-[11px] text-zinc-500">{stat.label}</p>
+            <motion.div key={stat.label} initial={{ opacity: 0, y: 12 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: i * 0.05 }}>
+              <div className="rounded-xl border border-zinc-800/60 bg-surface-2 p-4">
+                <stat.icon className={`mb-2 h-5 w-5 ${stat.color}`} />
+                <p className="text-lg font-bold text-zinc-100">{stat.value}</p>
+                <p className="text-[11px] text-zinc-500">{stat.label}</p>
+              </div>
             </motion.div>
           ))}
         </div>
@@ -120,29 +121,31 @@ export default function TeamPage() {
                 <motion.div key={member.id}
                   initial={i >= initialMembers.length ? { opacity: 0, y: -8 } : false}
                   animate={{ opacity: 1, y: 0 }}
-                  className="flex items-center justify-between rounded-lg border border-zinc-800/40 bg-surface-1 px-4 py-3 transition hover:border-zinc-700/60">
-                  <div className="flex items-center gap-3">
-                    <div className="flex h-9 w-9 items-center justify-center rounded-full bg-gradient-to-br from-primary/60 to-primary-light/60 text-xs font-bold text-white">
-                      {member.avatar}
+                >
+                  <div className="flex items-center justify-between rounded-lg border border-zinc-800/40 bg-surface-1 px-4 py-3 transition hover:border-zinc-700/60">
+                    <div className="flex items-center gap-3">
+                      <div className="flex h-9 w-9 items-center justify-center rounded-full bg-gradient-to-br from-primary/60 to-primary-light/60 text-xs font-bold text-white">
+                        {member.avatar}
+                      </div>
+                      <div>
+                        <p className="text-sm font-medium text-zinc-200">{member.name}</p>
+                        <p className="text-[11px] text-zinc-500">{member.email}</p>
+                      </div>
                     </div>
-                    <div>
-                      <p className="text-sm font-medium text-zinc-200">{member.name}</p>
-                      <p className="text-[11px] text-zinc-500">{member.email}</p>
+                    <div className="flex items-center gap-4">
+                      <div className="hidden text-right sm:block">
+                        <p className="text-[11px] text-zinc-400">{member.projects} projects</p>
+                        <p className={`text-[10px] ${member.lastActive === "Online" ? "text-success" : "text-zinc-500"}`}>
+                          {member.lastActive === "Online" && "● "}{member.lastActive}
+                        </p>
+                      </div>
+                      <span className={`flex items-center gap-1 rounded-full px-2.5 py-1 text-[10px] font-medium ${roleColors[member.role]}`}>
+                        <RoleIcon className="h-3 w-3" /> {member.role}
+                      </span>
+                      <button className="rounded-lg p-1.5 text-zinc-500 transition hover:bg-zinc-800 hover:text-zinc-300">
+                        <MoreHorizontal className="h-4 w-4" />
+                      </button>
                     </div>
-                  </div>
-                  <div className="flex items-center gap-4">
-                    <div className="hidden text-right sm:block">
-                      <p className="text-[11px] text-zinc-400">{member.projects} projects</p>
-                      <p className={`text-[10px] ${member.lastActive === "Online" ? "text-success" : "text-zinc-500"}`}>
-                        {member.lastActive === "Online" && "● "}{member.lastActive}
-                      </p>
-                    </div>
-                    <span className={`flex items-center gap-1 rounded-full px-2.5 py-1 text-[10px] font-medium ${roleColors[member.role]}`}>
-                      <RoleIcon className="h-3 w-3" /> {member.role}
-                    </span>
-                    <button className="rounded-lg p-1.5 text-zinc-500 transition hover:bg-zinc-800 hover:text-zinc-300">
-                      <MoreHorizontal className="h-4 w-4" />
-                    </button>
                   </div>
                 </motion.div>
               );
@@ -208,11 +211,10 @@ export default function TeamPage() {
       {/* Invite Modal */}
       <AnimatePresence>
         {showInvite && (
-          <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}
-            className="fixed inset-0 z-50 flex items-center justify-center bg-black/60 backdrop-blur-sm" onClick={resetInvite}>
-            <motion.div initial={{ scale: 0.95, opacity: 0 }} animate={{ scale: 1, opacity: 1 }} exit={{ scale: 0.95, opacity: 0 }}
-              onClick={(e) => e.stopPropagation()}
-              className="w-full max-w-sm rounded-2xl border border-zinc-800/60 bg-surface-1 shadow-2xl">
+          <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}>
+            <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/60 backdrop-blur-sm" onClick={resetInvite}>
+              <motion.div initial={{ scale: 0.95, opacity: 0 }} animate={{ scale: 1, opacity: 1 }} exit={{ scale: 0.95, opacity: 0 }}>
+                <div className="w-full max-w-sm rounded-2xl border border-zinc-800/60 bg-surface-1 shadow-2xl" onClick={(e) => e.stopPropagation()}>
               <div className="flex items-center justify-between border-b border-zinc-800/40 px-6 py-4">
                 <h3 className="text-sm font-semibold text-zinc-100">Invite Team Member</h3>
                 <button onClick={resetInvite} className="text-zinc-400 hover:text-zinc-200"><X className="h-4 w-4" /></button>
@@ -260,7 +262,9 @@ export default function TeamPage() {
                   <button onClick={resetInvite} className="rounded-lg bg-primary px-5 py-2 text-xs font-medium text-white">Done</button>
                 )}
               </div>
-            </motion.div>
+                </div>
+              </motion.div>
+            </div>
           </motion.div>
         )}
       </AnimatePresence>

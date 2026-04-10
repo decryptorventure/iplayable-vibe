@@ -187,11 +187,12 @@ export default function NetworksPage() {
               initial={{ opacity: 0, y: 12 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: i * 0.05 }}
-              className="rounded-xl border border-zinc-800/60 bg-surface-2 p-4"
             >
-              <stat.icon className={`mb-2 h-5 w-5 ${stat.color}`} />
-              <p className="text-lg font-bold text-zinc-100">{stat.value}</p>
-              <p className="text-[11px] text-zinc-500">{stat.label}</p>
+              <div className="rounded-xl border border-zinc-800/60 bg-surface-2 p-4">
+                <stat.icon className={`mb-2 h-5 w-5 ${stat.color}`} />
+                <p className="text-lg font-bold text-zinc-100">{stat.value}</p>
+                <p className="text-[11px] text-zinc-500">{stat.label}</p>
+              </div>
             </motion.div>
           ))}
         </div>
@@ -204,61 +205,62 @@ export default function NetworksPage() {
               initial={{ opacity: 0, y: 12 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: index * 0.06 }}
-              className="group rounded-xl border border-zinc-800/60 bg-surface-2 p-5 transition-all duration-200 hover:border-zinc-700/60"
             >
-              <div className="mb-4 flex items-center justify-between">
-                <div className="flex items-center gap-3">
-                  <span className="text-2xl">{network.logo}</span>
-                  <div>
-                    <h3 className="text-sm font-semibold text-zinc-200">{network.name}</h3>
-                    {network.lastSync && (
-                      <p className="text-[10px] text-zinc-500">Last sync: {network.lastSync}</p>
-                    )}
-                  </div>
-                </div>
-                <StatusBadge status={network.status} />
-              </div>
-
-              {network.status !== "disconnected" && (
-                <div className="mb-4 grid grid-cols-2 gap-3">
-                  {[
-                    { label: "Impressions", value: network.metrics.impressions },
-                    { label: "Revenue", value: network.metrics.revenue },
-                    { label: "Fill Rate", value: network.metrics.fillRate },
-                    { label: "Creatives", value: network.metrics.creatives.toString() },
-                  ].map((m) => (
-                    <div key={m.label} className="rounded-lg bg-surface-1 p-2.5">
-                      <p className="text-[10px] text-zinc-500">{m.label}</p>
-                      <p className="text-sm font-bold text-zinc-200">{m.value}</p>
+              <div className="group rounded-xl border border-zinc-800/60 bg-surface-2 p-5 transition-all duration-200 hover:border-zinc-700/60">
+                <div className="mb-4 flex items-center justify-between">
+                  <div className="flex items-center gap-3">
+                    <span className="text-2xl">{network.logo}</span>
+                    <div>
+                      <h3 className="text-sm font-semibold text-zinc-200">{network.name}</h3>
+                      {network.lastSync && (
+                        <p className="text-[10px] text-zinc-500">Last sync: {network.lastSync}</p>
+                      )}
                     </div>
+                  </div>
+                  <StatusBadge status={network.status} />
+                </div>
+
+                {network.status !== "disconnected" && (
+                  <div className="mb-4 grid grid-cols-2 gap-3">
+                    {[
+                      { label: "Impressions", value: network.metrics.impressions },
+                      { label: "Revenue", value: network.metrics.revenue },
+                      { label: "Fill Rate", value: network.metrics.fillRate },
+                      { label: "Creatives", value: network.metrics.creatives.toString() },
+                    ].map((m) => (
+                      <div key={m.label} className="rounded-lg bg-surface-1 p-2.5">
+                        <p className="text-[10px] text-zinc-500">{m.label}</p>
+                        <p className="text-sm font-bold text-zinc-200">{m.value}</p>
+                      </div>
+                    ))}
+                  </div>
+                )}
+
+                <div className="mb-4 flex flex-wrap gap-1.5">
+                  {network.features.map((f) => (
+                    <span key={f} className="rounded-md bg-zinc-800/60 px-2 py-0.5 text-[10px] font-medium text-zinc-400">{f}</span>
                   ))}
                 </div>
-              )}
 
-              <div className="mb-4 flex flex-wrap gap-1.5">
-                {network.features.map((f) => (
-                  <span key={f} className="rounded-md bg-zinc-800/60 px-2 py-0.5 text-[10px] font-medium text-zinc-400">{f}</span>
-                ))}
-              </div>
-
-              <div className="flex gap-2">
-                {network.status === "disconnected" ? (
-                  <button className="flex flex-1 items-center justify-center gap-2 rounded-lg bg-primary px-3 py-2 text-xs font-medium text-white transition hover:bg-primary-dark">
-                    <Zap className="h-3.5 w-3.5" /> Connect
-                  </button>
-                ) : (
-                  <>
-                    <button className="flex flex-1 items-center justify-center gap-1.5 rounded-lg border border-zinc-800/60 bg-surface-3 px-3 py-2 text-xs font-medium text-zinc-400 transition hover:text-zinc-200">
-                      <RefreshCw className="h-3.5 w-3.5" /> Sync Now
+                <div className="flex gap-2">
+                  {network.status === "disconnected" ? (
+                    <button className="flex flex-1 items-center justify-center gap-2 rounded-lg bg-primary px-3 py-2 text-xs font-medium text-white transition hover:bg-primary-dark">
+                      <Zap className="h-3.5 w-3.5" /> Connect
                     </button>
-                    <button className="rounded-lg border border-zinc-800/60 bg-surface-3 p-2 text-zinc-400 transition hover:text-zinc-200">
-                      <Settings className="h-3.5 w-3.5" />
-                    </button>
-                    <button className="rounded-lg border border-zinc-800/60 bg-surface-3 p-2 text-zinc-400 transition hover:text-zinc-200">
-                      <ExternalLink className="h-3.5 w-3.5" />
-                    </button>
-                  </>
-                )}
+                  ) : (
+                    <>
+                      <button className="flex flex-1 items-center justify-center gap-1.5 rounded-lg border border-zinc-800/60 bg-surface-3 px-3 py-2 text-xs font-medium text-zinc-400 transition hover:text-zinc-200">
+                        <RefreshCw className="h-3.5 w-3.5" /> Sync Now
+                      </button>
+                      <button className="rounded-lg border border-zinc-800/60 bg-surface-3 p-2 text-zinc-400 transition hover:text-zinc-200">
+                        <Settings className="h-3.5 w-3.5" />
+                      </button>
+                      <button className="rounded-lg border border-zinc-800/60 bg-surface-3 p-2 text-zinc-400 transition hover:text-zinc-200">
+                        <ExternalLink className="h-3.5 w-3.5" />
+                      </button>
+                    </>
+                  )}
+                </div>
               </div>
             </motion.div>
           ))}
@@ -281,21 +283,22 @@ export default function NetworksPage() {
                 key={i}
                 initial={i === 0 && ruleCreated ? { opacity: 0, y: -8 } : false}
                 animate={{ opacity: 1, y: 0 }}
-                className="flex items-center justify-between rounded-lg border border-zinc-800/40 bg-surface-1 px-4 py-3"
               >
-                <div className="flex items-center gap-3">
-                  <div className={`h-2 w-2 rounded-full ${rule.status === "active" ? "bg-success" : "bg-zinc-500"}`} />
-                  <p className="text-sm text-zinc-300">{rule.rule}</p>
-                </div>
-                <div className="flex items-center gap-3">
-                  {rule.triggered > 0 && (
-                    <span className="rounded-md bg-primary/10 px-2 py-0.5 text-[10px] font-medium text-primary">
-                      Triggered {rule.triggered}x
+                <div className="flex items-center justify-between rounded-lg border border-zinc-800/40 bg-surface-1 px-4 py-3">
+                  <div className="flex items-center gap-3">
+                    <div className={`h-2 w-2 rounded-full ${rule.status === "active" ? "bg-success" : "bg-zinc-500"}`} />
+                    <p className="text-sm text-zinc-300">{rule.rule}</p>
+                  </div>
+                  <div className="flex items-center gap-3">
+                    {rule.triggered > 0 && (
+                      <span className="rounded-md bg-primary/10 px-2 py-0.5 text-[10px] font-medium text-primary">
+                        Triggered {rule.triggered}x
+                      </span>
+                    )}
+                    <span className={`text-[11px] font-medium ${rule.status === "active" ? "text-success" : "text-zinc-500"}`}>
+                      {rule.status === "active" ? "Active" : "Paused"}
                     </span>
-                  )}
-                  <span className={`text-[11px] font-medium ${rule.status === "active" ? "text-success" : "text-zinc-500"}`}>
-                    {rule.status === "active" ? "Active" : "Paused"}
-                  </span>
+                  </div>
                 </div>
               </motion.div>
             ))}
@@ -306,11 +309,10 @@ export default function NetworksPage() {
       {/* Rule Builder Modal */}
       <AnimatePresence>
         {showRuleModal && (
-          <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}
-            className="fixed inset-0 z-50 flex items-center justify-center bg-black/60 backdrop-blur-sm" onClick={resetRuleModal}>
-            <motion.div initial={{ scale: 0.95, opacity: 0 }} animate={{ scale: 1, opacity: 1 }} exit={{ scale: 0.95, opacity: 0 }}
-              onClick={(e) => e.stopPropagation()}
-              className="w-full max-w-md rounded-2xl border border-zinc-800/60 bg-surface-1 shadow-2xl">
+          <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}>
+            <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/60 backdrop-blur-sm" onClick={resetRuleModal}>
+              <motion.div initial={{ scale: 0.95, opacity: 0 }} animate={{ scale: 1, opacity: 1 }} exit={{ scale: 0.95, opacity: 0 }}>
+                <div className="w-full max-w-md rounded-2xl border border-zinc-800/60 bg-surface-1 shadow-2xl" onClick={(e) => e.stopPropagation()}>
 
               <div className="flex items-center justify-between border-b border-zinc-800/40 px-6 py-4">
                 <h3 className="text-base font-semibold text-zinc-100">⚡ New Automation Rule</h3>
@@ -403,9 +405,11 @@ export default function NetworksPage() {
                   <button onClick={resetRuleModal} className="rounded-lg bg-primary px-5 py-2 text-xs font-medium text-white">Done</button>
                 )}
               </div>
+              </div>
             </motion.div>
-          </motion.div>
-        )}
+          </div>
+        </motion.div>
+      )}
       </AnimatePresence>
     </div>
   );

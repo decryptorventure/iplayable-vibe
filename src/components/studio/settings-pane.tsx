@@ -241,15 +241,16 @@ export function SettingsPane() {
       </Accordion>
 
       <AnimatePresence>
-        <motion.p
+        <motion.div
           key={JSON.stringify(config)}
           initial={{ opacity: 0, y: 4 }}
           animate={{ opacity: 1, y: 0 }}
           exit={{ opacity: 0 }}
-          className="mt-4 rounded-md border border-primary/20 bg-primary/5 px-2 py-1 text-[11px] text-primary"
         >
-          Configuration auto-updated from AI output.
-        </motion.p>
+          <p className="mt-4 rounded-md border border-primary/20 bg-primary/5 px-2 py-1 text-[11px] text-primary">
+            Configuration auto-updated from AI output.
+          </p>
+        </motion.div>
       </AnimatePresence>
     </section>
   );

@@ -57,9 +57,9 @@ export default function SettingsPage() {
             <motion.div
               initial={{ opacity: 0, y: 8 }}
               animate={{ opacity: 1, y: 0 }}
-              className="max-w-2xl space-y-6"
             >
-              <h2 className="text-lg font-semibold text-zinc-100">General Settings</h2>
+              <div className="max-w-2xl space-y-6">
+                <h2 className="text-lg font-semibold text-zinc-100">General Settings</h2>
 
               <div className="space-y-4 rounded-xl border border-zinc-800/60 bg-surface-2 p-5">
                 <div>
@@ -110,6 +110,7 @@ export default function SettingsPage() {
                 <Save className="h-4 w-4" />
                 Save Changes
               </button>
+              </div>
             </motion.div>
           )}
 
@@ -117,9 +118,9 @@ export default function SettingsPage() {
             <motion.div
               initial={{ opacity: 0, y: 8 }}
               animate={{ opacity: 1, y: 0 }}
-              className="max-w-2xl space-y-6"
             >
-              <h2 className="text-lg font-semibold text-zinc-100">API Keys</h2>
+              <div className="max-w-2xl space-y-6">
+                <h2 className="text-lg font-semibold text-zinc-100">API Keys</h2>
 
               <div className="space-y-3 rounded-xl border border-zinc-800/60 bg-surface-2 p-5">
                 {[
@@ -161,6 +162,7 @@ export default function SettingsPage() {
                 <Key className="h-4 w-4" />
                 + Add API Key
               </button>
+              </div>
             </motion.div>
           )}
 
@@ -168,13 +170,14 @@ export default function SettingsPage() {
             <motion.div
               initial={{ opacity: 0, y: 8 }}
               animate={{ opacity: 1, y: 0 }}
-              className="flex flex-col items-center justify-center py-20"
             >
-              <Settings className="mb-3 h-10 w-10 text-zinc-600" />
-              <p className="text-sm text-zinc-400">
-                {tabs.find((t) => t.id === activeTab)?.label} settings
-              </p>
-              <p className="text-xs text-zinc-600">Coming soon</p>
+              <div className="flex flex-col items-center justify-center py-20">
+                <Settings className="mb-3 h-10 w-10 text-zinc-600" />
+                <p className="text-sm text-zinc-400">
+                  {tabs.find((t) => t.id === activeTab)?.label} settings
+                </p>
+                <p className="text-xs text-zinc-600">Coming soon</p>
+              </div>
             </motion.div>
           )}
         </div>

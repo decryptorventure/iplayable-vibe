@@ -33,8 +33,8 @@ export function PlayableCard({
           initial={{ opacity: 0, x: -8 }}
           animate={{ opacity: 1, x: 0 }}
           transition={{ duration: 0.2, delay: Math.min(index * 0.02, 0.3) }}
-          className="group flex items-center gap-4 rounded-xl border border-zinc-800/60 bg-surface-2 p-4 transition-all duration-200 hover:border-primary/30 hover:bg-surface-3"
         >
+          <div className="group flex items-center gap-4 rounded-xl border border-zinc-800/60 bg-surface-2 p-4 transition-all duration-200 hover:border-primary/30 hover:bg-surface-3">
           {/* Icon */}
           <div className="flex h-11 w-11 shrink-0 items-center justify-center rounded-xl bg-gradient-to-br from-primary/20 to-primary/5">
             <Gamepad2 className="h-5 w-5 text-primary" />
@@ -82,6 +82,7 @@ export function PlayableCard({
           </div>
 
           <ArrowRight className="h-4 w-4 shrink-0 text-zinc-600 transition-all group-hover:translate-x-1 group-hover:text-primary" />
+          </div>
         </motion.div>
       </Link>
     );
@@ -93,8 +94,8 @@ export function PlayableCard({
         initial={{ opacity: 0, y: 8 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.25, delay: Math.min(index * 0.03, 0.3) }}
-        className="group relative h-full overflow-hidden rounded-xl border border-zinc-800/60 bg-surface-2 transition-all duration-200 hover:border-primary/30 hover:shadow-glow"
       >
+        <div className="group relative h-full overflow-hidden rounded-xl border border-zinc-800/60 bg-surface-2 transition-all duration-200 hover:border-primary/30 hover:shadow-glow">
         {/* Status dot */}
         <div className={`absolute right-3 top-3 z-10 h-2.5 w-2.5 rounded-full ${statusColor(ad.status)} ring-2 ring-surface-2`} />
 
@@ -141,6 +142,7 @@ export function PlayableCard({
           <div className="mt-3 flex justify-end">
             <ArrowRight className="h-4 w-4 text-zinc-600 transition-all group-hover:translate-x-1 group-hover:text-primary" />
           </div>
+        </div>
         </div>
       </motion.div>
     </Link>

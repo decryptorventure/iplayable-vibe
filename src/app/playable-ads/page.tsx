@@ -288,63 +288,63 @@ export default function PlayableAdsPage() {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
-            className="fixed inset-0 z-50 flex items-center justify-center bg-black/60 backdrop-blur-sm"
-            onClick={() => setShowQuickCreate(false)}
           >
-            <motion.div
-              initial={{ opacity: 0, scale: 0.95, y: 8 }}
-              animate={{ opacity: 1, scale: 1, y: 0 }}
-              exit={{ opacity: 0, scale: 0.95, y: 8 }}
-              onClick={(e) => e.stopPropagation()}
-              className="mx-4 w-full max-w-lg rounded-2xl border border-zinc-800/60 bg-surface-2 p-6"
-            >
-              <div className="mb-4 flex items-center justify-between">
-                <div>
-                  <h3 className="text-lg font-semibold text-zinc-100">
-                    Tạo nhanh Playable Ads
-                  </h3>
-                  <p className="text-xs text-zinc-500">
-                    Tải lên nhiều file và tạo nhanh nhiều playable ads cùng lúc
+            <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/60 backdrop-blur-sm" onClick={() => setShowQuickCreate(false)}>
+              <motion.div
+                initial={{ opacity: 0, scale: 0.95, y: 8 }}
+                animate={{ opacity: 1, scale: 1, y: 0 }}
+                exit={{ opacity: 0, scale: 0.95, y: 8 }}
+              >
+                <div className="mx-4 w-full max-w-lg rounded-2xl border border-zinc-800/60 bg-surface-2 p-6" onClick={(e) => e.stopPropagation()}>
+                  <div className="mb-4 flex items-center justify-between">
+                    <div>
+                      <h3 className="text-lg font-semibold text-zinc-100">
+                        Tạo nhanh Playable Ads
+                      </h3>
+                      <p className="text-xs text-zinc-500">
+                        Tải lên nhiều file và tạo nhanh nhiều playable ads cùng lúc
+                      </p>
+                    </div>
+                    <button
+                      onClick={() => setShowQuickCreate(false)}
+                      className="rounded-lg p-1 text-zinc-400 transition hover:bg-zinc-800 hover:text-zinc-200"
+                    >
+                      <X className="h-5 w-5" />
+                    </button>
+                  </div>
+
+                  <p className="mb-2 text-xs font-medium text-zinc-300">
+                    File Playable Ad
                   </p>
+
+                  {/* Drop zone */}
+                  <div className="mb-4 rounded-xl border-2 border-dashed border-zinc-700/60 bg-surface-1 p-10 text-center transition hover:border-primary/30">
+                    <FileUp className="mx-auto mb-3 h-8 w-8 text-zinc-500" />
+                    <p className="text-sm text-zinc-300">
+                      Kéo thả nhiều file HTML hoặc ZIP vào đây
+                    </p>
+                    <p className="mt-1 text-xs text-zinc-500">
+                      hoặc click để chọn nhiều file. Tối đa 50MB mỗi file
+                    </p>
+                    <button className="mt-4 rounded-lg bg-primary px-5 py-2 text-sm font-medium text-white transition hover:bg-primary-dark">
+                      📁 Chọn files
+                    </button>
+                  </div>
+
+                  <div className="flex justify-end gap-3">
+                    <button
+                      onClick={() => setShowQuickCreate(false)}
+                      className="rounded-lg border border-zinc-800/60 px-4 py-2 text-sm text-zinc-400 transition hover:text-zinc-200"
+                    >
+                      Hủy
+                    </button>
+                    <button className="rounded-lg bg-zinc-700/60 px-4 py-2 text-sm font-medium text-zinc-300">
+                      + Tạo 0 playable ads
+                    </button>
+                  </div>
                 </div>
-                <button
-                  onClick={() => setShowQuickCreate(false)}
-                  className="rounded-lg p-1 text-zinc-400 transition hover:bg-zinc-800 hover:text-zinc-200"
-                >
-                  <X className="h-5 w-5" />
-                </button>
-              </div>
-
-              <p className="mb-2 text-xs font-medium text-zinc-300">
-                File Playable Ad
-              </p>
-
-              {/* Drop zone */}
-              <div className="mb-4 rounded-xl border-2 border-dashed border-zinc-700/60 bg-surface-1 p-10 text-center transition hover:border-primary/30">
-                <FileUp className="mx-auto mb-3 h-8 w-8 text-zinc-500" />
-                <p className="text-sm text-zinc-300">
-                  Kéo thả nhiều file HTML hoặc ZIP vào đây
-                </p>
-                <p className="mt-1 text-xs text-zinc-500">
-                  hoặc click để chọn nhiều file. Tối đa 50MB mỗi file
-                </p>
-                <button className="mt-4 rounded-lg bg-primary px-5 py-2 text-sm font-medium text-white transition hover:bg-primary-dark">
-                  📁 Chọn files
-                </button>
-              </div>
-
-              <div className="flex justify-end gap-3">
-                <button
-                  onClick={() => setShowQuickCreate(false)}
-                  className="rounded-lg border border-zinc-800/60 px-4 py-2 text-sm text-zinc-400 transition hover:text-zinc-200"
-                >
-                  Hủy
-                </button>
-                <button className="rounded-lg bg-zinc-700/60 px-4 py-2 text-sm font-medium text-zinc-300">
-                  + Tạo 0 playable ads
-                </button>
-              </div>
-            </motion.div>
+              </motion.div>
+            </div>
           </motion.div>
         )}
       </AnimatePresence>

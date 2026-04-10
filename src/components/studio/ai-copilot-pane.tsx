@@ -58,12 +58,13 @@ export function AICopilotPane() {
           <motion.div
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
-            className="inline-flex items-center gap-1 rounded-md border border-zinc-800 bg-zinc-900 px-2 py-1 text-xs text-zinc-400"
           >
-            <span className="h-1.5 w-1.5 animate-pulse rounded-full bg-zinc-500" />
-            <span className="h-1.5 w-1.5 animate-pulse rounded-full bg-zinc-500 [animation-delay:0.2s]" />
-            <span className="h-1.5 w-1.5 animate-pulse rounded-full bg-zinc-500 [animation-delay:0.4s]" />
-            AI is thinking...
+            <div className="inline-flex items-center gap-1 rounded-md border border-zinc-800 bg-zinc-900 px-2 py-1 text-xs text-zinc-400">
+              <span className="h-1.5 w-1.5 animate-pulse rounded-full bg-zinc-500" />
+              <span className="h-1.5 w-1.5 animate-pulse rounded-full bg-zinc-500 [animation-delay:0.2s]" />
+              <span className="h-1.5 w-1.5 animate-pulse rounded-full bg-zinc-500 [animation-delay:0.4s]" />
+              AI is thinking...
+            </div>
           </motion.div>
         )}
       </div>

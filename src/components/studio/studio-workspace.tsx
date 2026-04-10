@@ -65,8 +65,10 @@ export function StudioWorkspace() {
                     )}
                   </Button>
                 </div>
-                <motion.div layout className="h-full">
-                  <PreviewPane />
+                <motion.div layout>
+                  <div className="h-full">
+                    <PreviewPane />
+                  </div>
                 </motion.div>
               </div>
             </Panel>

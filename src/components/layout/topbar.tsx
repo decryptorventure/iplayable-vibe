@@ -112,8 +112,8 @@ export function Topbar({ title, subtitle }: { title: string; subtitle?: string }
                 animate={{ opacity: 1, y: 0, scale: 1 }}
                 exit={{ opacity: 0, y: 8, scale: 0.95 }}
                 transition={{ duration: 0.15 }}
-                className="absolute right-0 top-12 z-50 w-96 rounded-xl border border-zinc-800/60 bg-surface-1 shadow-2xl"
               >
+                <div className="absolute right-0 top-12 z-50 w-96 rounded-xl border border-zinc-800/60 bg-surface-1 shadow-2xl">
                 {/* Header */}
                 <div className="flex items-center justify-between border-b border-zinc-800/40 px-4 py-3">
                   <h3 className="text-sm font-semibold text-zinc-100">🔔 Notifications</h3>
@@ -174,6 +174,7 @@ export function Topbar({ title, subtitle }: { title: string; subtitle?: string }
                     className="text-[11px] text-zinc-500 transition hover:text-primary">
                     Notification Settings →
                   </Link>
+                </div>
                 </div>
               </motion.div>
             )}

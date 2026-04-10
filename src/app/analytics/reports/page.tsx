@@ -90,11 +90,12 @@ export default function ReportsPage() {
             { label: "Email Recipients", value: "8", icon: Mail, color: "text-info" },
             { label: "Auto-insights Included", value: "23", icon: Sparkles, color: "text-warning" },
           ].map((stat, i) => (
-            <motion.div key={stat.label} initial={{ opacity: 0, y: 12 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: i * 0.05 }}
-              className="rounded-xl border border-zinc-800/60 bg-surface-2 p-4">
-              <stat.icon className={`mb-2 h-5 w-5 ${stat.color}`} />
-              <p className="text-lg font-bold text-zinc-100">{stat.value}</p>
-              <p className="text-[11px] text-zinc-500">{stat.label}</p>
+            <motion.div key={stat.label} initial={{ opacity: 0, y: 12 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: i * 0.05 }}>
+              <div className="rounded-xl border border-zinc-800/60 bg-surface-2 p-4">
+                <stat.icon className={`mb-2 h-5 w-5 ${stat.color}`} />
+                <p className="text-lg font-bold text-zinc-100">{stat.value}</p>
+                <p className="text-[11px] text-zinc-500">{stat.label}</p>
+              </div>
             </motion.div>
           ))}
         </div>
@@ -109,36 +110,37 @@ export default function ReportsPage() {
           </div>
           <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
             {reportTemplates.map((tmpl, i) => (
-              <motion.div key={tmpl.id} initial={{ opacity: 0, y: 12 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: i * 0.06 }}
-                className="rounded-xl border border-zinc-800/60 bg-surface-2 p-5 transition hover:border-zinc-700/60">
-                <div className="mb-3 flex items-center justify-between">
-                  <span className="text-2xl">{tmpl.icon}</span>
-                  <span className={`rounded-full px-2 py-0.5 text-[10px] font-medium ${tmpl.status === "scheduled" ? "bg-success/10 text-success" : "bg-zinc-800 text-zinc-400"}`}>
-                    {tmpl.status === "scheduled" ? "Scheduled" : "Manual"}
-                  </span>
-                </div>
-                <h3 className="mb-1 text-sm font-semibold text-zinc-200">{tmpl.name}</h3>
-                <p className="mb-3 text-xs text-zinc-500">{tmpl.desc}</p>
+              <motion.div key={tmpl.id} initial={{ opacity: 0, y: 12 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: i * 0.06 }}>
+                <div className="rounded-xl border border-zinc-800/60 bg-surface-2 p-5 transition hover:border-zinc-700/60">
+                  <div className="mb-3 flex items-center justify-between">
+                    <span className="text-2xl">{tmpl.icon}</span>
+                    <span className={`rounded-full px-2 py-0.5 text-[10px] font-medium ${tmpl.status === "scheduled" ? "bg-success/10 text-success" : "bg-zinc-800 text-zinc-400"}`}>
+                      {tmpl.status === "scheduled" ? "Scheduled" : "Manual"}
+                    </span>
+                  </div>
+                  <h3 className="mb-1 text-sm font-semibold text-zinc-200">{tmpl.name}</h3>
+                  <p className="mb-3 text-xs text-zinc-500">{tmpl.desc}</p>
 
-                <div className="mb-3 space-y-1 text-[11px]">
-                  <div className="flex justify-between text-zinc-400">
-                    <span>Schedule:</span><span className="text-zinc-300">{tmpl.schedule}</span>
+                  <div className="mb-3 space-y-1 text-[11px]">
+                    <div className="flex justify-between text-zinc-400">
+                      <span>Schedule:</span><span className="text-zinc-300">{tmpl.schedule}</span>
+                    </div>
+                    <div className="flex justify-between text-zinc-400">
+                      <span>Format:</span><span className="text-zinc-300">{tmpl.format}</span>
+                    </div>
+                    <div className="flex justify-between text-zinc-400">
+                      <span>Last run:</span><span className="text-zinc-300">{tmpl.lastRun}</span>
+                    </div>
                   </div>
-                  <div className="flex justify-between text-zinc-400">
-                    <span>Format:</span><span className="text-zinc-300">{tmpl.format}</span>
-                  </div>
-                  <div className="flex justify-between text-zinc-400">
-                    <span>Last run:</span><span className="text-zinc-300">{tmpl.lastRun}</span>
-                  </div>
-                </div>
 
-                <div className="flex gap-2">
-                  <button className="flex flex-1 items-center justify-center gap-1.5 rounded-lg border border-zinc-800/60 bg-surface-3 py-2 text-xs text-zinc-400 transition hover:text-zinc-200">
-                    <Eye className="h-3.5 w-3.5" /> Preview
-                  </button>
-                  <button className="flex flex-1 items-center justify-center gap-1.5 rounded-lg bg-primary/10 py-2 text-xs font-medium text-primary transition hover:bg-primary/20">
-                    <Download className="h-3.5 w-3.5" /> Run Now
-                  </button>
+                  <div className="flex gap-2">
+                    <button className="flex flex-1 items-center justify-center gap-1.5 rounded-lg border border-zinc-800/60 bg-surface-3 py-2 text-xs text-zinc-400 transition hover:text-zinc-200">
+                      <Eye className="h-3.5 w-3.5" /> Preview
+                    </button>
+                    <button className="flex flex-1 items-center justify-center gap-1.5 rounded-lg bg-primary/10 py-2 text-xs font-medium text-primary transition hover:bg-primary/20">
+                      <Download className="h-3.5 w-3.5" /> Run Now
+                    </button>
+                  </div>
                 </div>
               </motion.div>
             ))}

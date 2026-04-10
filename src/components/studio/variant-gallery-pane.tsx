@@ -63,9 +63,9 @@ function MiniPreview({ config, seed, rank }: { config: VariantConfig; seed: stri
                   initial={{ height: 0 }}
                   animate={{ height: h }}
                   transition={{ delay: i * 0.05, duration: 0.3 }}
-                  className="w-3 rounded-t"
-                  style={{ background: `hsl(${(hue1 + i * 60) % 360}, 70%, 55%)` }}
-                />
+                >
+                  <div className="w-3 h-full rounded-t" style={{ background: `hsl(${(hue1 + i * 60) % 360}, 70%, 55%)` }} />
+                </motion.div>
               );
             })}
             <div className="absolute bottom-10 text-lg">
@@ -83,13 +83,14 @@ function MiniPreview({ config, seed, rank }: { config: VariantConfig; seed: stri
                 initial={{ scale: 0, opacity: 0 }}
                 animate={{ scale: 1, opacity: 1 }}
                 transition={{ delay: i * 0.02, duration: 0.2 }}
-                className="flex h-6 w-6 items-center justify-center rounded text-[10px]"
-                style={{
-                  background: `hsl(${(hue1 + i * 40) % 360}, 60%, ${25 + (i % 3) * 10}%)`,
-                  border: `1px solid hsl(${(hue1 + i * 40) % 360}, 40%, 35%)`,
-                }}
               >
-                {icons[i % icons.length]}
+                <div className="flex h-6 w-6 items-center justify-center rounded text-[10px]"
+                  style={{
+                    background: `hsl(${(hue1 + i * 40) % 360}, 60%, ${25 + (i % 3) * 10}%)`,
+                    border: `1px solid hsl(${(hue1 + i * 40) % 360}, 40%, 35%)`,
+                  }}>
+                  {icons[i % icons.length]}
+                  </div>
               </motion.div>
             ))}
           </div>
@@ -282,8 +283,8 @@ export function VariantGalleryPane() {
       {/* Generation progress */}
       <AnimatePresence>
         {isGenerating && (
-          <motion.div initial={{ height: 0, opacity: 0 }} animate={{ height: "auto", opacity: 1 }} exit={{ height: 0, opacity: 0 }}
-            className="overflow-hidden border-b border-zinc-800/30">
+          <motion.div initial={{ height: 0, opacity: 0 }} animate={{ height: "auto", opacity: 1 }} exit={{ height: 0, opacity: 0 }}>
+            <div className="overflow-hidden border-b border-zinc-800/30">
             <div className="bg-zinc-900/50 px-4 py-3">
               <div className="mb-2 flex items-center justify-between text-xs text-zinc-300">
                 <span className="inline-flex items-center gap-1.5">
@@ -294,14 +295,16 @@ export function VariantGalleryPane() {
               </div>
               <div className="h-2 overflow-hidden rounded-full bg-zinc-800">
                 <motion.div
-                  className="h-full rounded-full bg-gradient-to-r from-primary to-primary-light"
                   style={{ width: `${generationProgress}%` }}
                   transition={{ duration: 0.3 }}
-                />
+                >
+                  <div className="h-full rounded-full bg-gradient-to-r from-primary to-primary-light" style={{ height: '100%' }} />
+                </motion.div>
               </div>
             </div>
-          </motion.div>
-        )}
+          </div>
+        </motion.div>
+      )}
       </AnimatePresence>
 
       {/* Empty state */}
@@ -329,16 +332,18 @@ export function VariantGalleryPane() {
                 initial={{ opacity: 0, scale: 0.95 }}
                 animate={{ opacity: 1, scale: 1 }}
                 transition={{ duration: 0.2, delay: Math.min(index * 0.015, 0.3) }}
-                onClick={() => selectVariant(variant.id)}
-                className={cn(
-                  "group relative cursor-pointer rounded-xl border p-1.5 transition-all duration-150",
-                  focused
-                    ? "border-primary bg-primary/5 ring-1 ring-primary/30"
-                    : selected
-                    ? "border-primary/40 bg-orange-500/5"
-                    : "border-zinc-800/60 bg-zinc-900/40 hover:border-zinc-700 hover:bg-zinc-900/60"
-                )}
               >
+                <div
+                  onClick={() => selectVariant(variant.id)}
+                  className={cn(
+                    "group relative cursor-pointer rounded-xl border p-1.5 transition-all duration-150",
+                    focused
+                      ? "border-primary bg-primary/5 ring-1 ring-primary/30"
+                      : selected
+                      ? "border-primary/40 bg-orange-500/5"
+                      : "border-zinc-800/60 bg-zinc-900/40 hover:border-zinc-700 hover:bg-zinc-900/60"
+                  )}
+                >
                 {/* Selection checkbox overlay */}
                 <button
                   onClick={(e) => { e.stopPropagation(); toggleVariantSelection(variant.id); }}
@@ -368,7 +373,8 @@ export function VariantGalleryPane() {
 
                 {/* Stats */}
                 <VariantStats config={variant.config} ctr={variant.predictedCTR} />
-              </motion.div>
+              </div>
+            </motion.div>
             );
           })}
         </div>
@@ -386,12 +392,14 @@ export function VariantGalleryPane() {
                 initial={{ opacity: 0, x: -8 }}
                 animate={{ opacity: 1, x: 0 }}
                 transition={{ duration: 0.15, delay: Math.min(index * 0.01, 0.2) }}
-                onClick={() => selectVariant(variant.id)}
-                className={cn(
-                  "flex cursor-pointer items-center gap-3 rounded-lg border px-3 py-2 transition",
-                  focused ? "border-primary bg-primary/5" : selected ? "border-primary/30 bg-orange-500/5" : "border-zinc-800/40 bg-zinc-900/30 hover:border-zinc-700"
-                )}
               >
+                <div
+                  onClick={() => selectVariant(variant.id)}
+                  className={cn(
+                    "flex cursor-pointer items-center gap-3 rounded-lg border px-3 py-2 transition",
+                    focused ? "border-primary bg-primary/5" : selected ? "border-primary/30 bg-orange-500/5" : "border-zinc-800/40 bg-zinc-900/30 hover:border-zinc-700"
+                  )}
+                >
                 {/* Checkbox */}
                 <button
                   onClick={(e) => { e.stopPropagation(); toggleVariantSelection(variant.id); }}
@@ -435,6 +443,7 @@ export function VariantGalleryPane() {
                 )}>
                   {variant.predictedCTR.toFixed(1)}%
                 </span>
+                </div>
               </motion.div>
             );
           })}
