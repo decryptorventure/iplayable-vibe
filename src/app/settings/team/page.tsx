@@ -5,7 +5,6 @@ import { motion, AnimatePresence } from "framer-motion";
 import {
   Users,
   UserPlus,
-  Shield,
   Mail,
   Clock,
   MoreHorizontal,
@@ -13,7 +12,6 @@ import {
   X,
   Eye,
   Edit3,
-  Rocket,
   Crown,
 } from "lucide-react";
 import { Topbar } from "@/components/layout/topbar";

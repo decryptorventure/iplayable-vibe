@@ -6,12 +6,9 @@ import {
   Settings,
   User,
   Bell,
-  Shield,
   Palette,
   Key,
-  Globe,
   Save,
-  Database,
   Plug,
 } from "lucide-react";
 import { Topbar } from "@/components/layout/topbar";
