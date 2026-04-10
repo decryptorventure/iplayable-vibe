@@ -148,11 +148,12 @@ export default function AILabPage() {
               initial={{ opacity: 0, y: 12 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: i * 0.05 }}
-              className="rounded-xl border border-zinc-800/60 bg-surface-2 p-4"
             >
-              <stat.icon className={`mb-2 h-5 w-5 ${stat.color}`} />
-              <p className="text-lg font-bold text-zinc-100">{stat.value}</p>
-              <p className="text-[11px] text-zinc-500">{stat.label}</p>
+              <div className="rounded-xl border border-zinc-800/60 bg-surface-2 p-4">
+                <stat.icon className={`mb-2 h-5 w-5 ${stat.color}`} />
+                <p className="text-lg font-bold text-zinc-100">{stat.value}</p>
+                <p className="text-[11px] text-zinc-500">{stat.label}</p>
+              </div>
             </motion.div>
           ))}
         </div>
@@ -186,75 +187,76 @@ export default function AILabPage() {
                 initial={{ opacity: 0, y: 12 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: index * 0.06 }}
-                className="rounded-xl border border-zinc-800/60 bg-surface-2 p-5"
               >
-                <div className="mb-3 flex items-center justify-between">
-                  <div className="flex items-center gap-3">
-                    <div className="rounded-lg bg-primary/10 p-2">
-                      <Cpu className="h-4 w-4 text-primary" />
+                <div className="rounded-xl border border-zinc-800/60 bg-surface-2 p-5">
+                  <div className="mb-3 flex items-center justify-between">
+                    <div className="flex items-center gap-3">
+                      <div className="rounded-lg bg-primary/10 p-2">
+                        <Cpu className="h-4 w-4 text-primary" />
+                      </div>
+                      <div>
+                        <h3 className="text-sm font-semibold text-zinc-200">{model.name}</h3>
+                        <p className="text-[10px] text-zinc-500">{model.version}</p>
+                      </div>
                     </div>
+                    <ModelStatusBadge status={model.status} />
+                  </div>
+
+                  <p className="mb-3 text-xs text-zinc-400">{model.description}</p>
+
+                  <div className="mb-3 grid grid-cols-3 gap-3">
+                    <div className="rounded-lg bg-surface-1 p-2.5 text-center">
+                      <p className="text-[10px] text-zinc-500">Accuracy</p>
+                      <p className="text-sm font-bold text-zinc-200">
+                        {model.accuracy ? `${model.accuracy}%` : "—"}
+                      </p>
+                    </div>
+                    <div className="rounded-lg bg-surface-1 p-2.5 text-center">
+                      <p className="text-[10px] text-zinc-500">Samples</p>
+                      <p className="text-sm font-bold text-zinc-200">
+                        {(model.samples / 1000).toFixed(1)}K
+                      </p>
+                    </div>
+                    <div className="rounded-lg bg-surface-1 p-2.5 text-center">
+                      <p className="text-[10px] text-zinc-500">Last Train</p>
+                      <p className="truncate text-[11px] font-medium text-zinc-200">
+                        {model.lastTrained}
+                      </p>
+                    </div>
+                  </div>
+
+                  {/* Accuracy bar */}
+                  {model.accuracy && (
                     <div>
-                      <h3 className="text-sm font-semibold text-zinc-200">{model.name}</h3>
-                      <p className="text-[10px] text-zinc-500">{model.version}</p>
+                      <div className="mb-1 flex justify-between text-[10px]">
+                        <span className="text-zinc-500">Model Accuracy</span>
+                        <span className="text-zinc-300">{model.accuracy}%</span>
+                      </div>
+                      <div className="h-1.5 overflow-hidden rounded-full bg-zinc-800">
+                        <motion.div
+                          initial={{ width: 0 }}
+                          animate={{ width: `${model.accuracy}%` }}
+                          transition={{ duration: 1, delay: 0.3 }}
+                          className={`h-full rounded-full ${
+                            model.accuracy >= 85 ? "bg-success" : model.accuracy >= 70 ? "bg-warning" : "bg-danger"
+                          }`}
+                        />
+                      </div>
                     </div>
-                  </div>
-                  <ModelStatusBadge status={model.status} />
-                </div>
-
-                <p className="mb-3 text-xs text-zinc-400">{model.description}</p>
-
-                <div className="mb-3 grid grid-cols-3 gap-3">
-                  <div className="rounded-lg bg-surface-1 p-2.5 text-center">
-                    <p className="text-[10px] text-zinc-500">Accuracy</p>
-                    <p className="text-sm font-bold text-zinc-200">
-                      {model.accuracy ? `${model.accuracy}%` : "—"}
-                    </p>
-                  </div>
-                  <div className="rounded-lg bg-surface-1 p-2.5 text-center">
-                    <p className="text-[10px] text-zinc-500">Samples</p>
-                    <p className="text-sm font-bold text-zinc-200">
-                      {(model.samples / 1000).toFixed(1)}K
-                    </p>
-                  </div>
-                  <div className="rounded-lg bg-surface-1 p-2.5 text-center">
-                    <p className="text-[10px] text-zinc-500">Last Train</p>
-                    <p className="truncate text-[11px] font-medium text-zinc-200">
-                      {model.lastTrained}
-                    </p>
-                  </div>
-                </div>
-
-                {/* Accuracy bar */}
-                {model.accuracy && (
-                  <div>
-                    <div className="mb-1 flex justify-between text-[10px]">
-                      <span className="text-zinc-500">Model Accuracy</span>
-                      <span className="text-zinc-300">{model.accuracy}%</span>
-                    </div>
-                    <div className="h-1.5 overflow-hidden rounded-full bg-zinc-800">
-                      <motion.div
-                        initial={{ width: 0 }}
-                        animate={{ width: `${model.accuracy}%` }}
-                        transition={{ duration: 1, delay: 0.3 }}
-                        className={`h-full rounded-full ${
-                          model.accuracy >= 85 ? "bg-success" : model.accuracy >= 70 ? "bg-warning" : "bg-danger"
-                        }`}
-                      />
-                    </div>
-                  </div>
-                )}
-
-                <div className="mt-3 flex gap-2">
-                  <button className="flex flex-1 items-center justify-center gap-1.5 rounded-lg border border-zinc-800/60 bg-surface-3 px-3 py-2 text-xs text-zinc-400 transition hover:text-zinc-200">
-                    <BarChart3 className="h-3.5 w-3.5" />
-                    View Metrics
-                  </button>
-                  {model.status !== "training" && (
-                    <button className="flex items-center gap-1.5 rounded-lg border border-primary/30 bg-primary/5 px-3 py-2 text-xs font-medium text-primary transition hover:bg-primary/10">
-                      <RefreshCw className="h-3.5 w-3.5" />
-                      Retrain
-                    </button>
                   )}
+
+                  <div className="mt-3 flex gap-2">
+                    <button className="flex flex-1 items-center justify-center gap-1.5 rounded-lg border border-zinc-800/60 bg-surface-3 px-3 py-2 text-xs text-zinc-400 transition hover:text-zinc-200">
+                      <BarChart3 className="h-3.5 w-3.5" />
+                      View Metrics
+                    </button>
+                    {model.status !== "training" && (
+                      <button className="flex items-center gap-1.5 rounded-lg border border-primary/30 bg-primary/5 px-3 py-2 text-xs font-medium text-primary transition hover:bg-primary/10">
+                        <RefreshCw className="h-3.5 w-3.5" />
+                        Retrain
+                      </button>
+                    )}
+                  </div>
                 </div>
               </motion.div>
             ))}
@@ -270,32 +272,33 @@ export default function AILabPage() {
                 initial={{ opacity: 0, x: -12 }}
                 animate={{ opacity: 1, x: 0 }}
                 transition={{ delay: i * 0.06 }}
-                className="rounded-xl border border-zinc-800/60 bg-surface-2 p-5"
               >
-                <div className="flex items-start gap-4">
-                  <span className="text-2xl">{insight.icon}</span>
-                  <div className="min-w-0 flex-1">
-                    <div className="mb-1 flex items-center gap-3">
-                      <h3 className="text-sm font-semibold text-zinc-200">{insight.title}</h3>
-                      <span
-                        className={`rounded-full px-2 py-0.5 text-[10px] font-medium ${
-                          insight.confidence >= 90
-                            ? "bg-success/10 text-success"
-                            : insight.confidence >= 80
-                            ? "bg-primary/10 text-primary"
-                            : "bg-zinc-800 text-zinc-400"
-                        }`}
-                      >
-                        {insight.confidence}% confidence
-                      </span>
+                <div className="rounded-xl border border-zinc-800/60 bg-surface-2 p-5">
+                  <div className="flex items-start gap-4">
+                    <span className="text-2xl">{insight.icon}</span>
+                    <div className="min-w-0 flex-1">
+                      <div className="mb-1 flex items-center gap-3">
+                        <h3 className="text-sm font-semibold text-zinc-200">{insight.title}</h3>
+                        <span
+                          className={`rounded-full px-2 py-0.5 text-[10px] font-medium ${
+                            insight.confidence >= 90
+                              ? "bg-success/10 text-success"
+                              : insight.confidence >= 80
+                              ? "bg-primary/10 text-primary"
+                              : "bg-zinc-800 text-zinc-400"
+                          }`}
+                        >
+                          {insight.confidence}% confidence
+                        </span>
+                      </div>
+                      <p className="text-xs text-zinc-400">{insight.description}</p>
+                      {insight.actionable && (
+                        <button className="mt-3 flex items-center gap-1.5 rounded-lg bg-primary/10 px-3 py-1.5 text-xs font-medium text-primary transition hover:bg-primary/20">
+                          <Sparkles className="h-3.5 w-3.5" />
+                          Apply to Generator
+                        </button>
+                      )}
                     </div>
-                    <p className="text-xs text-zinc-400">{insight.description}</p>
-                    {insight.actionable && (
-                      <button className="mt-3 flex items-center gap-1.5 rounded-lg bg-primary/10 px-3 py-1.5 text-xs font-medium text-primary transition hover:bg-primary/20">
-                        <Sparkles className="h-3.5 w-3.5" />
-                        Apply to Generator
-                      </button>
-                    )}
                   </div>
                 </div>
               </motion.div>
