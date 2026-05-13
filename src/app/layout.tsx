@@ -2,6 +2,8 @@ import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import { Sidebar } from "@/components/layout/sidebar";
 import { Toaster } from "@/components/ui/toaster";
+import { AIAgentFab } from "@/components/ai-agent/ai-agent-fab";
+import { AIAgentPanel } from "@/components/ai-agent/ai-agent-panel";
 import "./globals.css";
 
 const inter = Inter({ subsets: ["latin"] });
@@ -20,6 +22,8 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           <main className="h-screen flex-1 overflow-hidden">{children}</main>
         </div>
         <Toaster />
+        <AIAgentFab />
+        <AIAgentPanel />
       </body>
     </html>
   );
